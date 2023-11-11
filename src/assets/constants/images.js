@@ -34,6 +34,35 @@ const ICON = {
     /**Pantalla actualizar datos */
     PANTALLA_ACTUALIZAR_DATOS_BOTON:            require ('../pantalla_actualizar_datos/boton_actualizar_datos.png'),
     PANTALLA_ACTUALIZAR_DATOS_AVATAR_WHITE_107: require ('../pantalla_actualizar_datos/avatar_white_107.png'),
+
+    /**Pantalla seleccion */
+    PANTALLA_SELECCION_FONDO:                   require ('../pantalla_seleccion/fondo_red_top.png'),
+    PANTALLA_SELECCION_MENU:                    require ('../pantalla_seleccion/button_menu.png'),
+    PANTALLA_SELECCION_AVATAR:                  require ('../pantalla_seleccion/avatar_white_80.png'),
+    PANTALLA_SELECCION_ICONO_UNO:               require ('../pantalla_seleccion/seleccion_moto_icono.png'),
+    PANTALLA_SELECCION_ICONO_DOS:               require ('../pantalla_seleccion/seleccion_mototaxi_icono.png'),
+    PANTALLA_SELECCION_ICONO_TRES:              require ('../pantalla_seleccion/seleccion_camioneta_icono.png'),
+    PANTALLA_SELECCION_ICONO_CUATRO:            require ('../pantalla_seleccion/seleccion_bus_icono.png'),
+    PANTALLA_SELECCION_ICONO_CINCO:             require ('../pantalla_seleccion/seleccion_camion_icono.png'),
+    CLOSE_MENU:                                 require ('../comun/close_menu.png'),
+
+    /**Cuestionario */
+    BARRA_SUPERIOR_AVATAR_RED:                  require ('../cuestionario/avatar_red_80.png'),
+    BARRA_SUPERIOR_BOTON_ATRAS:                 require ('../cuestionario/boton_atras.png'),
+    BARRA_SUPERIOR_BOTON_SIGUIENTE:             require ('../cuestionario/boton_siguiente.png'),
+    BARRA_SUPERIOR_CIRCLE_BLACK:                require ('../cuestionario/circle_black.png'),
+    BARRA_SUPERIOR_CIRCLE_GREY:                 require ('../cuestionario/circle_grey.png'),
+    RADIO_UNSELECT:                             require ('../cuestionario/radio_unselect.png'),
+    RADIO_SELECT:                               require ('../cuestionario/radio_select.png'),
+    PREGUNTA_IMAGEN:                            require ('../cuestionario/pregunta_imagen.png'),
+
+    /**Respuestas */
+    RESPUESTAS_BARRA_SUPERIOR_RED:              require ('../respuestas/fondo_top_red.png'),
+    RESPUESTAS_BARRA_SUPERIOR_GREEN:            require ('../respuestas/fondo_top_green.png'),
+    ICONO_ESCUELA_MANEJO:                       require ('../respuestas/icono_escuela_manejo.png'),
+    ICONO_EXAMEN_MANEJO:                        require ('../respuestas/icono_examen_manejo.png'),
+    RESPUESTAS_PORCENTAJE_RED:                  require ('../respuestas/respuestas_porcentaje_red.png'),
+    RESPUESTAS_PORCENTAJE_GREEN:                require ('../respuestas/respuestas_porcentaje_green.png')
 }
 
 export {ICON}

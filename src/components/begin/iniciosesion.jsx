@@ -3,14 +3,36 @@ import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 import {ICON} from '../../assets/constants/images'
+import { useDispatch, useSelector } from 'react-redux';
+import {begindata} from '../../redux/slice/begindata';
+import {beginConstants} from '../../redux/uri/begin-constants'
 
 export default function InicioSesionScreen ({navigation}) {
+
+    const dispatch = useDispatch()
 
     const [usuario, setUsuario] = useState ('')
     const [password, setPassword] = useState ('')
 
-    const iniciar_sesion = () => {
+    const {login_user} = useSelector(({begin}) => begin)
+    
+    useEffect (() => {
+      if (login_user && login_user.access_token){
+        console.log ('login_user', login_user.access_token)
+        //navigation.navigate ('ActualizarDatosScreen')
+      }
+    }, [login_user])
 
+    const iniciar_sesion = () => {
+      if (usuario === '' || password === ''){
+
+      } else{
+        const data_user = {
+          email: usuario,
+          password: password
+        }
+        dispatch (begindata(beginConstants(data_user, false, 0).login_user))
+      }
     }
 
     return (

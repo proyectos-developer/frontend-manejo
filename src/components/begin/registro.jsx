@@ -3,16 +3,39 @@ import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 import {ICON} from '../../assets/constants/images'
+import { useDispatch, useSelector } from 'react-redux';
+import {begindata} from '../../redux/slice/begindata';
+import {beginConstants} from '../../redux/uri/begin-constants'
 
 export default function RegistroScreen ({navigation}) {
 
-  const [nombres_apellidos, setNombresApellidos] = useState ('')
-  const [correo, setCorreo] = useState ('')
-  const [password, setPassword] = useState ('')
-  const [confirmar_password, setConfirmarPassword] = useState ('')
+    const dispatch = useDispatch()
+
+    const [nombres_apellidos, setNombresApellidos] = useState ('')
+    const [correo, setCorreo] = useState ('')
+    const [password, setPassword] = useState ('')
+    const [confirmar_password, setConfirmarPassword] = useState ('')
+
+    const {register_user} = useSelector(({begin}) => begin)
+    
+    useEffect (() => {
+      if (register_user && register_user.access_token){
+        console.log ('register_user', register_user.access_token)
+        //navigation.navigate ('ActualizarDatosScreen')
+      }
+    }, [register_user])
 
     const registrar_usuario = () => {
-      navigation.navigate ('ActualizarDatosScreen')
+      if (nombres_apellidos === '' || correo === '' || password === '' || confirmar_password === '' || (password !== confirmar_password)){
+
+      } else{
+        const data_user = {
+          name: nombres_apellidos,
+          email: correo,
+          password: password
+        }
+        dispatch (begindata(beginConstants(data_user, false, 0).register_user))
+      }
     }
 
     return (
