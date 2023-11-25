@@ -5,28 +5,16 @@ import { constantes } from "../uri/constantes"
 const baseurl = `${constantes().url_principal[0].url}`
 let stateType = ''
 
-export const begindata = createAsyncThunk ('', async (params) => {
+export const preguntasdata = createAsyncThunk ('', async (params) => {
     stateType = params.stateType
     switch (stateType){
-        case 'login_user':
-        case 'register_user':
+        case 'get_preguntas':
+        case 'get_pregunta':
             if (params.reset){ 
                 return {success: null}
             }else{
                 try{
-                    const response = await axios.post (`${baseurl}/${params.path}`, params.data)
-                    return response.data
-                }catch (err){
-                    return err.message
-                }
-            }
-        case 'get_user':
-            if (params.reset){ 
-                return {success: null}
-            }else{
-                try{
-                    const response = await axios.get (`${baseurl}/${params.path}`, 
-                                        {headers: {Authorization: `Bearer ${params.token}`}})
+                    const response = await axios.get (`${baseurl}/${params.path}`)
                     return response.data
                 }catch (err){
                     return err.message
@@ -45,23 +33,23 @@ const initialState = (type) => {
     }
 }
 
-const dataBegin = createSlice ({
+const dataPreguntas = createSlice ({
     name: 'fetch',
     initialState: initialState (stateType),
     extraReducers: (builder) => {
-        builder.addCase (begindata.pending, (state) => {
+        builder.addCase (preguntasdata.pending, (state) => {
             state.loading = true
         }),
-        builder.addCase (begindata.fulfilled, (state, action) => {
+        builder.addCase (preguntasdata.fulfilled, (state, action) => {
             state.loading = false
             state.finishWithErrors = false
             state[stateType] = action.payload
         }),
-        builder.addCase (begindata.rejected, (state) => {
+        builder.addCase (preguntasdata.rejected, (state) => {
             state.loading = false
             state.finishWithErrors = true
         })
     }
 })
 
-export default dataBegin.reducer
+export default dataPreguntas.reducer

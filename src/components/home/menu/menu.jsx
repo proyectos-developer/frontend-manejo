@@ -3,32 +3,73 @@ import React from 'react'
 import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-handler'
 
 import { ICON } from '../../../assets/constants/images'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { set_menu_open } from '../../../redux/actions/dataactions'
 
 export default function Menu ({navigation}) {
-  return (
-    <View style={styles.container_menu}>
-        <TouchableOpacity style={styles.close_menu}>
-            <Image source={ICON.CLOSE_MENU}/>
-        </TouchableOpacity>
-        <GestureHandlerRootView style={styles.container_lista}>
-            <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => navigation.navigate('SeleccionScreen')}>
-                <Text style={styles.text_item}>Categorías</Text>
-            </TouchableOpacity>
+
+    const dispatch = useDispatch()
+    const [authenticated, setAuthenticated] = useState(false)
+
+    useEffect (() => {
+        obtener_token()
+    }, [])
+
+    const obtener_token = async () => {
+        try {
+            const token = AsyncStorage.getItem ('token')
+            if (token){
+                setAuthenticated(true)
+            }   
+        } catch (error) {
             
-            <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]}>
-                <Text style={styles.text_item}>Examen médico</Text>
-            </TouchableOpacity>
+        }
+    }
+
+    const cerrar_sesion = async() => {
+        try {
+            await AsyncStorage.removeItem ('token')
+            await AsyncStorage.removeItem ('email')
+            dispatch (set_menu_open(false))
+            navigation.navigate ('LoginScreen')
+        } catch (error) {
             
-            <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]}>
-                <Text style={styles.text_item}>Escuelas de manejo</Text>
+        }
+    }
+
+    return (
+        <View style={styles.container_menu}>
+            <TouchableOpacity style={styles.close_menu} onPress={() => dispatch(set_menu_open(false))}>
+                <Image source={ICON.CLOSE_MENU}/>
             </TouchableOpacity>
-            
-            <TouchableOpacity style={[styles.container_item]}>
-                <Text style={styles.text_item}>Iniciar sesión</Text>
-            </TouchableOpacity>
-        </GestureHandlerRootView>
-    </View> 
-  )
+            <GestureHandlerRootView style={styles.container_lista}>
+                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('SeleccionScreen'); dispatch(set_menu_open(false))}}>
+                    <Text style={styles.text_item}>Categorías</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('ExamenMedicoScreen'); dispatch(set_menu_open(false))}}>
+                    <Text style={styles.text_item}>Examen médico</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('EscuelasManejoScreen'); dispatch(set_menu_open(false))}}>
+                    <Text style={styles.text_item}>Escuelas de manejo</Text>
+                </TouchableOpacity>
+                
+                <TouchableOpacity style={[styles.container_item]} onPress={() => cerrar_sesion()}>
+                    <Text style={styles.text_item}>
+                        {
+                            authenticated ? (
+                                'Cerrar sesión'
+                            ) : 'Iniciar sesión'
+                        }
+                    </Text>
+                </TouchableOpacity>
+            </GestureHandlerRootView>
+        </View> 
+    )
 }
 
 

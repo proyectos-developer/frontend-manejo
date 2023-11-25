@@ -7,20 +7,25 @@ export default function LoginScreen ({navigation}) {
 
     return (
         <GestureHandlerRootView style={styles.container}>
-            <ImageBackground style={styles.fondo} source={ICON.PANTALLA_INICIO_FONDO}/>
-            <Image source={ICON.LOGO_WHITE} style={styles.logo}/>
+            <ImageBackground style={styles.fondo} source={ICON.PANTALLA_INICIO_FONDO}>
+              <Image source={ICON.LOGO_WHITE_235} style={styles.logo}/>
             
-            <TouchableOpacity style={[styles.boton, {top: 550}]} onPress={() => navigation.navigate('RegistroScreen')}>
-                <Image source={ICON.PANTALLA_INICIO_BOTON_REGISTRO} style={{width: '100%', flex: 1}}/>
-            </TouchableOpacity>
+              <TouchableOpacity style={[styles.boton_grey, {top: 550}]} onPress={() => navigation.navigate('RegistroScreen')}>
+                  <Text style={[styles.text_boton, {color: '#212121'}]}>Regístrate</Text>
+              </TouchableOpacity>
             
-            <TouchableOpacity style={[styles.boton, {top: 631}]} onPress={() => navigation.navigate('InicioSesionScreen')}>
-                <Image source={ICON.PANTALLA_INICIO_BOTON_INICIO} style={{width: '100%', flex: 1}}/>
-            </TouchableOpacity>
+              <TouchableOpacity style={[styles.boton_red, {top: 631}]} onPress={() => navigation.navigate('InicioSesionScreen')}>
+                  <Text style={[styles.text_boton, {color: '#ffffff'}]}>Iniciar sesión</Text>
+              </TouchableOpacity>
             
-            <TouchableOpacity style={[styles.texto]} onPress={() => navigation.navigate('RestablecerPassScreen')}>
-                <Image source={ICON.PANTALLA_INICIO_TEXTO} style={{width: '100%', flex: 1}}/>
-            </TouchableOpacity>
+              <View style={styles.view_restablecer}>
+                <Text style={[styles.texto_restablecer, {color: '#ffffff', fontFamily: 'Nunito-Regular', marginRight: 5}]}>¿Has olvidado tu contraeña?</Text>
+                <TouchableOpacity onPress={() => navigation.navigate('RestablecerPassScreen')}>
+                    <Text style={[styles.texto_restablecer, {color: '#ff0000', fontFamily: 'Nunito-Bold'}]}>Click aquí</Text>
+                </TouchableOpacity>
+              </View>
+
+            </ImageBackground>
         </GestureHandlerRootView>
     )
 }
@@ -37,29 +42,40 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   logo: {
-    width: 159,
-    height: 52,
-    position: 'absolute',
-    top: 92,
-    alignContent: 'center'
+    width: 235,
+    height: 217,
+    alignSelf: 'center'
   },
-  boton: {
+  boton_grey: {
     position: 'absolute',
+    backgroundColor: '#bdbdbd',
     width: 270,
     height: 58,
-    alignContent: 'center'
+    alignSelf: 'center',
+    borderRadius: 40
   },
-  boton_uno: {
-    top: 550
-  },
-  boton_dos: {
-    top: 631
-  },
-  texto: {
+  boton_red: {
     position: 'absolute',
-    width: 254,
-    height: 14,
-    alignContent: 'center',
-    top: 700
-  }
+    backgroundColor: '#ff0000',
+    width: 270,
+    height: 58,
+    alignSelf: 'center',
+    borderRadius: 40
+  },
+  text_boton: {
+    fontSize: 25,
+    lineHeight: 58,
+    fontFamily: 'Nunito-Bold',
+    textAlign: 'center'
+  },
+  view_restablecer: {
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 700,
+    alignSelf: 'center'
+  },
+  texto_restablecer: {
+    fontSize: 14,
+    lineHeight: 19
+  },
 })

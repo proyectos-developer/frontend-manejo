@@ -1,15 +1,48 @@
 import {useEffect, useState} from 'react'
-import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, ScrollView } from 'react-native'
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 import {ICON} from '../../assets/constants/images'
+import { useIsFocused } from '@react-navigation/native';
+import { useDispatch, useSelector } from 'react-redux';
+import {begindata} from '../../redux/slice/begindata';
+import { beginConstants } from '../../redux/uri/begin-constants';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ActualizarDatosScreen ({navigation}) {
+
+    const isFocused = useIsFocused ()
+    const dispatch = useDispatch()
 
     const [nombres_apellidos, setNombresApellidos] = useState ('')
     const [correo, setCorreo] = useState ('')
     const [password, setPassword] = useState ('')
     const [confirmar_password, setConfirmarPassword] = useState ('')
+
+    const {get_user} = useSelector(({begin}) => begin)
+    const begin = useSelector (({begin}) => begin)
+
+    useEffect (() => {
+      if (isFocused){
+        obtener_token ()
+      }
+    }, [isFocused])
+
+    useEffect(() => {
+      if (get_user){
+        setNombresApellidos(get_user.name)
+        setCorreo(get_user.email)
+      }
+    }, [get_user])
+
+    const obtener_token = async () => {
+      try {
+        const token = await AsyncStorage.getItem ('token')
+        dispatch (begindata(beginConstants({}, false, 0, token).get_user))
+      } catch (error) {
+        
+      }
+    }
 
     const actualizar_datos = () => {
       navigation.navigate ('LoginScreen')
@@ -17,24 +50,24 @@ export default function ActualizarDatosScreen ({navigation}) {
 
     return (
         <GestureHandlerRootView style={styles.container}>
-            <ImageBackground style={styles.fondo} source={ICON.FONDO_TOP}/>
-            <Image source={ICON.LOGO_WHITE} style={styles.logo}/>
+            <ImageBackground style={styles.fondo} source={ICON.FONDO_TOP}>
+              <Image source={ICON.LOGO_WHITE_191} style={styles.logo}/>
+            </ImageBackground>
 
-            <View style={styles.container_datos}/>
-            
-            <Image source={ICON.PANTALLA_ACTUALIZAR_DATOS_AVATAR_WHITE_107} style={[styles.avatar]}/>
-
-            <TextInput
-              style={[styles.input, {top: 390}]}
-              value={nombres_apellidos}
-              onChange={(nombres_apellidos) => setNombresApellidos(nombres_apellidos)}
-              placeholder='Nombres y Apellidos'
-              placeholderTextColor='#ffffff'
-              onSubmitEditing={() => text_correo.focus()}
-              returnKeyType='next'/>
+            <ScrollView style={styles.container_datos}>
+              <Image source={ICON.AVATAR_WHITE_199} style={[styles.avatar]}/>
 
               <TextInput
-                style={[styles.input, {top: 454}]}
+                style={[[styles.input, {marginBottom: 22}]]}
+                value={nombres_apellidos}
+                onChange={(nombres_apellidos) => setNombresApellidos(nombres_apellidos)}
+                placeholder='Nombres y Apellidos'
+                placeholderTextColor='#ffffff'
+                onSubmitEditing={() => text_correo.focus()}
+                returnKeyType='next'/>
+
+              <TextInput
+                style={[[styles.input, {marginBottom: 22}]]}
                 value={correo}
                 onChange={(correo) => setCorreo(correo)}
                 placeholder='Correo electrónico'
@@ -45,7 +78,7 @@ export default function ActualizarDatosScreen ({navigation}) {
                 autoCapitalize='none'/>
 
               <TextInput
-                style={[styles.input, {top: 518}]}
+                style={[[styles.input, {marginBottom: 22}]]}
                 value={password}
                 onChange={(password) => setPassword(password)}
                 placeholder='Contraseña '
@@ -56,7 +89,7 @@ export default function ActualizarDatosScreen ({navigation}) {
                 autoCapitalize='none'/>
 
               <TextInput
-                style={[styles.input, {top: 583}]}
+                style={[styles.input, {marginBottom: 42}]}
                 value={confirmar_password}
                 onChange={(confirmar_password) => setConfirmarPassword(confirmar_password)}
                 placeholder='Confirmar contraseña '
@@ -65,10 +98,18 @@ export default function ActualizarDatosScreen ({navigation}) {
                 onSubmitEditing={() => actualizar_datos()}
                 returnKeyType='done'
                 autoCapitalize='none'/>
-            
-            <TouchableOpacity style={[styles.boton, {top: 667}]} onPress={() => actualizar_datos()}>
-                <Image source={ICON.PANTALLA_ACTUALIZAR_DATOS_BOTON} style={{width: '100%', height: 58}}/>
-            </TouchableOpacity>
+              
+              <TouchableOpacity style={[styles.boton]} onPress={() => actualizar_datos()}>
+                  <Text style={styles.texto_actualizar}>Actualizar datos</Text>
+              </TouchableOpacity>
+            </ScrollView>
+            {
+              begin.loading ? ( 
+                <View style={styles.view_loading}>
+                  <Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                </View>
+              ) : null
+            }
             
         </GestureHandlerRootView>
     )
@@ -79,39 +120,33 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     width: '100%',
-    justifyContent: 'center',
     alignItems: 'center'
   },
   fondo: {
     height: 371,
     width: '100%',
-    position: 'absolute',
-    top: 0
   },
   logo: {
-    width: 159,
-    height: 52,
-    position: 'absolute',
-    top: 92,
-    alignContent: 'center'
+    width: 191,
+    height: 191,
+    alignContent: 'center',
+    alignSelf: 'center'
   },
   container_datos: {
     position: 'absolute',
     top: 211,
-    backgroundColor: '#FF0000',
+    backgroundColor: '#ff0000',
     width: 314,
     height: 554,
     borderRadius: 40
   },
   avatar: {
-    width: 107,
-    height: 107,
-    position: 'absolute',
-    top: 244,
-    alignContent: 'center'
+    width: 199,
+    height: 199,
+    alignContent: 'center',
+    alignSelf: 'center'
   },
   input: {
-    position: 'absolute',
     width: 284,
     height: 43, 
     alignContent: 'center',
@@ -119,26 +154,33 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     paddingLeft: 26,
-    color: '#ffffff'
+    color: '#ffffff',
+    alignSelf: 'center'
   },
   boton: {
-    position: 'absolute',
     width: 270,
     height: 58,
-    alignContent: 'center'
-  },
-  texto_olvidaste: {
-    position: 'absolute',
-    width: 231,
-    height: 14,
     alignContent: 'center',
-    top: 647
+    backgroundColor: '#252525',
+    alignSelf: 'center',
+    borderRadius: 40
   },
-  texto_crea: {
+  texto_actualizar: {
+    fontSize: 25,
+    lineHeight: 58,
+    fontFamily: 'Nunito-Bold',
+    color: 'white',
+    textAlign: 'center'
+  },
+  view_loading: {
     position: 'absolute',
-    width: 234,
-    height: 13,
-    alignContent: 'center',
-    top: 745
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
+  icono_loading: {
+    width: '100%'
+  }
 })

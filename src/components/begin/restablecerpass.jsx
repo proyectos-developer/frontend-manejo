@@ -17,29 +17,32 @@ export default function RestablecerPassScreen ({navigation}) {
 
     return (
         <GestureHandlerRootView style={styles.container}>
-            <ImageBackground style={styles.fondo} source={ICON.FONDO_TOP}/>
-            <Image source={ICON.LOGO_WHITE} style={styles.logo}/>
-            
-            <Image source={ICON.PANTALLA_RESTABLECER_CONTRASEÑA_TITULO} style={styles.texto_titulo}/>
-            
-            <Image source={ICON.PANTALLA_RESTABLECER_CONTRASEÑA_DESCRIPCION} style={styles.texto_descripcion}/>
-            
-            <Image source={ICON.PANTALLA_RESTABLECER_ENVIAR_CORREO} style={styles.texto_correo}/>
+            <ImageBackground style={styles.fondo} source={ICON.FONDO_TOP}>
+              <Image source={ICON.LOGO_WHITE_235} style={styles.logo}/>
+            </ImageBackground>
 
-            <TextInput
-              style={[styles.input, {top: 563}]}
-              value={confirmar_password}
-              onChange={(confirmar_password) => setConfirmarPassword(confirmar_password)}
-              placeholder='Introducir email'
-              placeholderTextColor='#252525'
-              ref={(input) => { text_correo = input }}
-              onSubmitEditing={() => enviar_correo()}
-              returnKeyType='done'
-              autoCapitalize='none'/>
-            
-            <TouchableOpacity style={[styles.boton, {top: 667}]} onPress={() => enviar_correo()}>
-                <Image source={ICON.PANTALLA_RESTABLECER_CONTRASEÑA_BOTON} style={{width: '100%', height: 58}}/>
-            </TouchableOpacity>
+            <View style={[styles.view_container]}>
+              <Text style={[styles.texto_titulo]}>Reestablecer contraseña</Text>
+              <Text style={[styles.texto_descripcion]}>Introduce el email asociado a la cuenta y te enviaremos{`\n`}
+              las instrucciones para reestablecer tu contraseña</Text>
+              
+              <Text style={[styles.texto_correo]}>Dirección de email</Text>
+
+              <TextInput
+                style={[styles.input]}
+                value={confirmar_password}
+                onChange={(confirmar_password) => setConfirmarPassword(confirmar_password)}
+                placeholder='Introducir email'
+                placeholderTextColor='#252525'
+                ref={(input) => { text_correo = input }}
+                onSubmitEditing={() => enviar_correo()}
+                returnKeyType='done'
+                autoCapitalize='none'/>
+              
+              <TouchableOpacity style={[styles.boton_enviar]} onPress={() => enviar_correo()}>
+                  <Text style={styles.texto_enviar}>Enviar</Text>
+              </TouchableOpacity>
+            </View>
             
         </GestureHandlerRootView>
     )
@@ -50,24 +53,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     width: '100%',
-    justifyContent: 'center',
     alignItems: 'center'
   },
   fondo: {
     height: 371,
     width: '100%',
-    position: 'absolute',
-    top: 0
+    marginBottom: 49
   },
   logo: {
-    width: 159,
-    height: 52,
-    position: 'absolute',
-    top: 92,
-    alignContent: 'center'
+    width: 235,
+    height: 217,
+    alignSelf: 'center'
+  },
+  view_container:{
+    flex: 1,
+    width: '100%'
   },
   input: {
-    position: 'absolute',
     width: 284,
     height: 43, 
     alignContent: 'center',
@@ -75,33 +77,46 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 40,
     paddingLeft: 26,
-    color: '#252525'
+    color: '#252525',
+    alignSelf: 'center',
+    marginBottom: 61,
+    fontFamily: 'Nunito-Regular'
   },
-  boton: {
-    position: 'absolute',
+  boton_enviar: {
     width: 270,
     height: 58,
-    alignContent: 'center'
+    alignSelf: 'center',
+    borderRadius: 40,
+    backgroundColor: '#ff0000'
+  },
+  texto_enviar: {
+    color: 'white',
+    fontSize: 25,
+    fontFamily: 'Nunito-Bold',
+    lineHeight: 58,
+    textAlign: 'center'
   },
   texto_titulo: {
-    position: 'absolute',
-    width: 295,
-    height: 20,
-    alignContent: 'center',
-    top: 420
+    fontSize: 25,
+    lineHeight: 34,
+    alignSelf: 'center',
+    marginBottom: 8,
+    fontFamily: 'Nunito-Black'
   },
   texto_descripcion: {
-    position: 'absolute',
-    width: 295,
-    height: 28,
-    alignContent: 'center',
-    top: 462
+    fontSize: 12,
+    lineHeight: 16,
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginBottom: 38,
+    fontFamily: 'Nunito-Regular'
   },
   texto_correo: {
-    position: 'absolute',
-    width: 151,
-    height: 15,
-    left: 53,
-    top: 532
+    width: 284,
+    fontSize: 17,
+    lineHeight: 23,
+    marginBottom: 8,
+    fontFamily: 'Nunito-Black',
+    alignSelf: 'center'
   }
 })
