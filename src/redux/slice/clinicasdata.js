@@ -9,6 +9,7 @@ export const clinicasdata = createAsyncThunk ('', async (params) => {
     stateType = params.stateType
     switch (stateType){
         case 'get_clinicas':
+        case 'get_clinicas_search':
             if (params.reset){ 
                 return {success: null}
             }else{

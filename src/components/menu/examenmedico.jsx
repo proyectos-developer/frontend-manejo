@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Touchable } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Touchable, FlatList } from 'react-native'
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,21 +19,54 @@ export default function ExamenMedicoScreen ({navigation}) {
 
     const [distrito, setDistrito] = useState ('')
     const {menu_open} = useSelector(({datareducer}) => datareducer)
-    const {get_clinicas} = useSelector (({clinicas}) => clinicas)
+    const {get_clinicas, get_clinicas_search} = useSelector (({clinicas}) => clinicas)
     const begin = useSelector (({begin}) => begin)
 
     useEffect(() => {
       if (isFocused){
-        dispatch (clinicasdata(clinicasConstants(false).get_clinicas))
+        dispatch (clinicasdata(clinicasConstants(false, 0).get_clinicas))
       }
     }, [isFocused])
 
     useEffect (() => {
       if (get_clinicas && get_clinicas.clinicas){
-        console.log ('get', get_clinicas)
         setListaClinicas(get_clinicas.clinicas)
       }
     }, [get_clinicas])
+
+    useEffect (() => {
+      if (get_clinicas_search && get_clinicas_search.clinicas){
+        setListaClinicas(get_clinicas_search.clinicas)
+      }
+    }, [get_clinicas_search])
+
+    const clinicaItem = ({item}) => (
+      <View style={[styles.container_clinica, {marginRight: 5.5, marginLeft: 5.5, marginBottom: 18}]}>
+          <View style={styles.container_superior}>
+              <Text style={styles.texto_clinica}>{item.nombre}</Text>
+              
+          </View>
+          <View style={styles.container_inferior}>
+              <View style={styles.container_ubicacion}>
+                  <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
+                  <Text style={styles.texto_ubicacion}>{item.ubicacion}</Text>
+              </View>
+              <Text style={styles.texto_precio}>Examenes desde S/.{item.costo}</Text>
+              <TouchableOpacity style={styles.boton_telefono}>
+                  <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
+                  <Text style={styles.texto_boton}>{item.telefono}</Text>
+              </TouchableOpacity>
+          </View>
+      </View>
+    )
+
+    const buscar_clinicas = () => {
+      if (distrito === ''){
+        dispatch (clinicasdata(clinicasConstants(false, 0).get_clinicas))
+      }else{
+        dispatch(clinicasdata(clinicasConstants(false, distrito).get_clinicas_search))
+      }
+    }
 
     return (
         <GestureHandlerRootView style={styles.container}>
@@ -67,7 +100,7 @@ export default function ExamenMedicoScreen ({navigation}) {
                     placeholderTextColor='#252525'
                     returnKeyType='done'/>
 
-                <TouchableOpacity style={styles.view_search}>
+                <TouchableOpacity style={styles.view_search} onPress={() => buscar_clinicas()}>
                     <Image source={ICON.MEDICO_ICONO_LUPA} style={styles.icono_search}/>
                 </TouchableOpacity>
             </View>
@@ -75,80 +108,12 @@ export default function ExamenMedicoScreen ({navigation}) {
             <Text style={styles.texto_autorizadas}>Clínicas autorizadas por el MTC</Text>
             <Text style={styles.texto_listado}>Listado autorizado al 30 marzo 2024</Text>
 
-            <View style={[styles.container_filas, {marginBottom: 18}]}>
-                <View style={[styles.container_clinica, {marginRight: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>CLÍNICA 1</Text>
-                        
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                
-                <View style={[styles.container_clinica, {marginLeft: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>CLÍNICA 2</Text>
-
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-
             <View style={[styles.container_filas, {marginBottom: 30}]}>
-                <View style={[styles.container_clinica, {marginRight: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>CLÍNICA 43</Text>
-                        
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                
-                <View style={[styles.container_clinica, {marginLeft: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>CLÍNICA 4</Text>
-
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+              <FlatList
+                data={lista_clincias}
+                renderItem={clinicaItem}
+                numColumns={2}
+                keyExtractor={(item) => item.id}/>
             </View>
 
             <Text style={styles.texto_proceso}>Conoce todo sobre el proceso para obtener tu licencia de conducir</Text>
@@ -248,7 +213,7 @@ const styles = StyleSheet.create({
   },
   container_filas: {
     width: 308,
-    height: 178,
+    height: 374,
     flexDirection: 'row'
   },
   container_clinica: {

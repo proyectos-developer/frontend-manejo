@@ -9,6 +9,7 @@ export const escuelasdata = createAsyncThunk ('', async (params) => {
     stateType = params.stateType
     switch (stateType){
         case 'get_escuelas_manejo':
+        case 'get_escuelas_manejo_search':
             if (params.reset){ 
                 return {success: null}
             }else{

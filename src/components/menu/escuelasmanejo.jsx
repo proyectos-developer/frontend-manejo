@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Touchable } from 'react-native'
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Touchable, FlatList } from 'react-native'
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,21 +19,54 @@ export default function EscuelasManejoScreen ({navigation}) {
 
     const [distrito, setDistrito] = useState ('')
     const {menu_open} = useSelector(({datareducer}) => datareducer)
-    const {get_escuelas_manejo} = useSelector (({escuelas}) => escuelas)
+    const {get_escuelas_manejo, get_escuelas_manejo_search} = useSelector (({escuelas}) => escuelas)
     const begin = useSelector (({begin}) => begin)
 
     useEffect(() => {
       if (isFocused){
-        dispatch (escuelasdata(escuelasConstants(false).get_escuelas_manejo))
+        dispatch (escuelasdata(escuelasConstants(false, 0).get_escuelas_manejo))
       }
     }, [isFocused])
 
     useEffect (() => {
       if (get_escuelas_manejo && get_escuelas_manejo.escuelas_manejo){
-        console.log ('get', get_escuelas_manejo)
         setListaEscuelas(get_escuelas_manejo.escuelas_manejo)
       }
     }, [get_escuelas_manejo])
+
+    useEffect (() => {
+      if (get_escuelas_manejo_search && get_escuelas_manejo_search.escuelas_manejo){
+        setListaEscuelas(get_escuelas_manejo_search.escuelas_manejo)
+      }
+    }, [get_escuelas_manejo_search])
+
+    const escuelaItem = ({item}) => (
+      <View style={[styles.container_clinica, {marginRight: 5.5, marginLeft: 5.5, marginBottom: 18}]}>
+          <View style={styles.container_superior}>
+              <Text style={styles.texto_clinica}>{item.nombre}</Text>
+              
+          </View>
+          <View style={styles.container_inferior}>
+              <View style={styles.container_ubicacion}>
+                  <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
+                  <Text style={styles.texto_ubicacion}>{item.ubicacion}</Text>
+              </View>
+              <Text style={styles.texto_precio}>Examenes desde S/.{item.costo}</Text>
+              <TouchableOpacity style={styles.boton_telefono}>
+                  <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
+                  <Text style={styles.texto_boton}>{item.telefono}</Text>
+              </TouchableOpacity>
+          </View>
+      </View>
+    )
+
+    const buscar_escuelas = () => {
+      if (distrito === ''){
+        dispatch (escuelasdata(escuelasConstants(false, 0).get_escuelas_manejo))
+      }else{
+        dispatch(escuelasdata(escuelasConstants(false, distrito).get_escuelas_manejo_search))
+      }
+    }
 
     return (
         <GestureHandlerRootView style={styles.container}>
@@ -67,87 +100,19 @@ export default function EscuelasManejoScreen ({navigation}) {
                     placeholderTextColor='#252525'
                     returnKeyType='done'/>
 
-                <TouchableOpacity style={styles.view_search}>
+                <TouchableOpacity style={styles.view_search} onPress={() => buscar_escuelas()}>
                     <Image source={ICON.MEDICO_ICONO_LUPA} style={styles.icono_search}/>
                 </TouchableOpacity>
             </View>
 
             <Text style={styles.texto_proceso}>Conoce todo sobre el proceso para obtener tu licencia de conducir</Text>
 
-            <View style={[styles.container_filas, {marginBottom: 18}]}>
-                <View style={[styles.container_clinica, {marginRight: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>EMPRESA 1</Text>
-                        
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                
-                <View style={[styles.container_clinica, {marginLeft: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>EMPRESA 2</Text>
-
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </View>
-
-            <View style={[styles.container_filas]}>
-                <View style={[styles.container_clinica, {marginRight: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>EMPRESA 3</Text>
-                        
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                
-                <View style={[styles.container_clinica, {marginLeft: 11}]}>
-                    <View style={styles.container_superior}>
-                        <Text style={styles.texto_clinica}>EMPRESA 4</Text>
-
-                    </View>
-                    <View style={styles.container_inferior}>
-                        <View style={styles.container_ubicacion}>
-                            <Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
-                            <Text style={styles.texto_ubicacion}>Jesús María</Text>
-                        </View>
-                        <Text style={styles.texto_precio}>Examenes desde S/.12.00</Text>
-                        <TouchableOpacity style={styles.boton_telefono}>
-                            <Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
-                            <Text style={styles.texto_boton}>987 654 321</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+            <View style={[styles.container_filas, {marginBottom: 30}]}>
+                <FlatList
+                  data={lista_escuelas}
+                  renderItem={escuelaItem}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}/>
             </View>
             {
               begin.loading ? ( 
@@ -232,7 +197,7 @@ const styles = StyleSheet.create({
   },
   container_filas: {
     width: 308,
-    height: 178,
+    height: 374,
     flexDirection: 'row'
   },
   container_clinica: {
