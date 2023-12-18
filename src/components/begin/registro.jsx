@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, ScrollView } from 'react-native'
-import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { GestureHandlerRootView, TextInput, ScrollView } from 'react-native-gesture-handler';
 
 import {ICON} from '../../assets/constants/images'
 import { useDispatch, useSelector } from 'react-redux';
@@ -49,66 +49,67 @@ export default function RegistroScreen ({navigation}) {
     }
 
     return (
-        <GestureHandlerRootView style={styles.container}>
+          <GestureHandlerRootView style={styles.container}>
               <ImageBackground style={styles.fondo} source={ICON.FONDO_TOP}>
                 <Image source={ICON.LOGO_WHITE_191} style={styles.logo}/>
               </ImageBackground>
 
-              <ScrollView style={[styles.container_datos]}>
+              <View style={[styles.container_datos]}>
                 <Image source={ICON.AVATAR_GREY_199} style={[styles.avatar]}/>
 
-                  <TextInput
-                    keyboardType='default'
-                    style={[styles.input]}
-                    value={nombres_apellidos}
-                    onChangeText={(nombres_apellidos) => setNombresApellidos(nombres_apellidos)}
-                    placeholder='Nombres y Apellidos'
-                    placeholderTextColor='#252525'
-                    onSubmitEditing={() => text_correo.focus()}
-                    returnKeyType='next'/>
+                    <TextInput
+                      keyboardType='default'
+                      style={[styles.input]}
+                      value={nombres_apellidos}
+                      onChangeText={(nombres_apellidos) => setNombresApellidos(nombres_apellidos)}
+                      placeholder='Nombres y Apellidos'
+                      placeholderTextColor='#252525'
+                      onSubmitEditing={() => text_correo.focus()}
+                      returnKeyType='next'/>
 
-                  <TextInput
-                    keyboardType='email-address'
-                    style={[styles.input]}
-                    value={correo}
-                    onChangeText={(correo) => setCorreo(correo)}
-                    placeholder='Correo electrónico'
-                    placeholderTextColor='#252525'
-                    ref={(input) => { text_correo = input }}
-                    onSubmitEditing={() => text_contraseña.focus()}
-                    returnKeyType='next'
-                    autoCapitalize='none'/>
+                    <TextInput
+                      keyboardType='email-address'
+                      style={[styles.input]}
+                      value={correo}
+                      onChangeText={(correo) => setCorreo(correo)}
+                      placeholder='Correo electrónico'
+                      placeholderTextColor='#252525'
+                      ref={(input) => { text_correo = input }}
+                      onSubmitEditing={() => text_contraseña.focus()}
+                      returnKeyType='next'
+                      autoCapitalize='none'/>
 
-                  <TextInput
-                    keyboardType='default'
-                    style={[styles.input]}
-                    value={password}
-                    onChangeText={(password) => setPassword(password)}
-                    placeholder='Contraseña '
-                    placeholderTextColor='#252525'
-                    ref={(input) => { text_contraseña = input }}
-                    onSubmitEditing={() => text_confirmar.focus()}
-                    returnKeyType='next'
-                    secureTextEntry={true}
-                    autoCapitalize='none'/>
+                    <TextInput
+                      keyboardType='default'
+                      style={[styles.input]}
+                      value={password}
+                      onChangeText={(password) => setPassword(password)}
+                      placeholder='Contraseña '
+                      placeholderTextColor='#252525'
+                      ref={(input) => { text_contraseña = input }}
+                      onSubmitEditing={() => text_confirmar.focus()}
+                      returnKeyType='next'
+                      secureTextEntry={true}
+                      autoCapitalize='none'/>
 
-                  <TextInput
-                    keyboardType='default'
-                    style={[styles.input]}
-                    value={confirmar_password}
-                    onChangeText={(confirmar_password) => setConfirmarPassword(confirmar_password)}
-                    placeholder='Confirmar contraseña '
-                    placeholderTextColor='#252525'
-                    ref={(input) => { text_confirmar = input }}
-                    onSubmitEditing={() => registrar_usuario()}
-                    returnKeyType='done'
-                    secureTextEntry={true}
-                    autoCapitalize='none'/>
+                    <TextInput
+                      keyboardType='default'
+                      style={[styles.input]}
+                      value={confirmar_password}
+                      onChangeText={(confirmar_password) => setConfirmarPassword(confirmar_password)}
+                      placeholder='Confirmar contraseña '
+                      placeholderTextColor='#252525'
+                      ref={(input) => { text_confirmar = input }}
+                      onSubmitEditing={() => registrar_usuario()}
+                      returnKeyType='done'
+                      secureTextEntry={true}
+                      autoCapitalize='none'/>
 
-                  <TouchableOpacity style={[styles.boton]} onPress={() => registrar_usuario()}>
-                    <Text style={styles.texto_registro}>Registrame</Text>
-                  </TouchableOpacity>
-              </ScrollView>
+                    <TouchableOpacity style={[styles.boton]} onPress={() => registrar_usuario()}>
+                      <Text style={styles.texto_registro}>Registrame</Text>
+                    </TouchableOpacity>
+                    
+              </View>
             {
               begin.loading ? ( 
                 <View style={styles.view_loading}>
@@ -117,8 +118,7 @@ export default function RegistroScreen ({navigation}) {
               ) : null
             }
 
-            
-        </GestureHandlerRootView>
+          </GestureHandlerRootView>
     )
 }
 
@@ -127,11 +127,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     width: '100%',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   fondo: {
     height: 371,
     width: '100%',
+    left: 0, 
+    top: 0
   },
   logo: {
     width: 191,
@@ -144,7 +146,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f1f1f1',
     width: 314,
     height: 554,
-    borderRadius: 40
+    borderRadius: 40,
+    left: 23
   },
   avatar: {
     width: 191,

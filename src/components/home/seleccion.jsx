@@ -9,20 +9,15 @@ import { set_id_pregunta, set_id_respuestas, set_menu_open, set_nro_categoria, s
 import {preguntasdata} from '../../redux/slice/preguntasdata';
 import { preguntasConstants } from '../../redux/uri/preguntas-constants';
 import { useIsFocused } from '@react-navigation/native';
-import {begindata} from '../../redux/slice/begindata';
-import { beginConstants } from '../../redux/uri/begin-constants';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SeleccionScreen ({navigation}) {
 
     const dispatch = useDispatch()
     const isFocused = useIsFocused()
 
-    const [email_user, setEmailUser] = useState ('')
     const [nro_categoria, setNroCategoria] = useState (0)
 
     const {menu_open} = useSelector(({datareducer}) => datareducer)
-    const {get_user} = useSelector(({begin}) => begin)
     const begin = useSelector(({begin}) => begin)
     const {get_preguntas} = useSelector(({preguntas}) => preguntas)
 
@@ -30,23 +25,8 @@ export default function SeleccionScreen ({navigation}) {
       if(isFocused){
         dispatch (set_id_pregunta(0))
         dispatch (set_nro_pregunta(1))
-        obtener_token ()
       }
     }, [isFocused])
-
-    const obtener_token = async () => {
-      try {
-        const token = await AsyncStorage.getItem ('token')
-        dispatch(begindata(beginConstants({}, false, 0, token).get_user))
-      } catch (error) {
-      }
-    }
-
-    useEffect (() => {
-      if (get_user && get_user.email){
-        setEmailUser (get_user.email)
-      }
-    }, [get_user])
 
     useEffect (() => {
       if (get_preguntas && get_preguntas.preguntas){

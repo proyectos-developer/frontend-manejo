@@ -1,4 +1,5 @@
 export const datatypes = {
+    SET_LISTA_RESPUESTAS: 'SET_LISTA_RESPUESTAS',
     SET_MENU_OPEN: 'SET_MENU_OPEN',
     SET_ID_PREGUNTA: 'SET_ID_PREGUNTA',
     SET_NRO_PREGUNTA: 'SET_NRO_PREGUNTA',
@@ -43,6 +44,13 @@ export const datatypes = {
     SET_RESPUESTA_TREINTAYOCHO: 'SET_RESPUESTA_TREINTAYOCHO',
     SET_RESPUESTA_TREINTAYNUEVE: 'SET_RESPUESTA_TREINTAYNUEVE',
     SET_RESPUESTA_CUARENTA: 'SET_RESPUESTA_CUARENTA'
+}
+
+export const set_lista_respuestas = lista_respuestas => {
+    return {
+        lista_respuestas, 
+        type: datatypes.SET_LISTA_RESPUESTAS
+    }
 }
 
 export const set_menu_open = menu_open => {

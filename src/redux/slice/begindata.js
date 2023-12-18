@@ -10,11 +10,14 @@ export const begindata = createAsyncThunk ('', async (params) => {
     switch (stateType){
         case 'login_user':
         case 'register_user':
+        case 'forgot_password':
             if (params.reset){ 
                 return {success: null}
             }else{
                 try{
+                    console.log(`${baseurl}/${params.path}`)
                     const response = await axios.post (`${baseurl}/${params.path}`, params.data)
+                    console.log(response.data)
                     return response.data
                 }catch (err){
                     return err.message

@@ -28,6 +28,7 @@ export default function InicioSesionScreen ({navigation}) {
       try {
         await AsyncStorage.setItem ('token', token)
         await AsyncStorage.setItem ('email', email)
+        dispatch (begindata(beginConstants({}, true, 0, 0).login_user))
         navigation.navigate ('HomeStack')
       } catch (error) {
         

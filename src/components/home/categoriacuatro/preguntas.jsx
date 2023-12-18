@@ -5,7 +5,7 @@ import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-h
 import BarraSuperior from '../comun/barrasuperior'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useIsFocused, useRoute } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 import {preguntasdata} from '../../../redux/slice/preguntasdata'
 import { preguntasConstants } from '../../../redux/uri/preguntas-constants'
 import { useEffect } from 'react'
@@ -34,6 +34,7 @@ export default function CategoriaCuatroPreguntas ({navigation}) {
     const [respuesta_correcta, setRespuestaCorrecta]  = useState ('')
 
     const {get_pregunta} = useSelector(({preguntas}) => preguntas)
+    const begin = useSelector(({begin}) => begin)
     const {id_pregunta, nro_pregunta} = useSelector(({datareducer}) => datareducer)
 
     useEffect (() => {
@@ -66,25 +67,47 @@ export default function CategoriaCuatroPreguntas ({navigation}) {
                 'respuesta': respuesta_correcta
             }      
             setOpcion('')
-            dispatch (num_pregunta === 1 ? set_respuesta_uno(update_data) : num_pregunta === 2 ? set_respuesta_dos (update_data) : num_pregunta === 3 ? set_respuesta_tres(update_data) :
-                      num_pregunta === 4 ? set_respuesta_cuatro (update_data) : num_pregunta === 5 ? set_respuesta_cinco(update_data) : num_pregunta === 6 ? set_respuesta_seis(update_data) :
-                      num_pregunta === 7 ? set_respuesta_siete (update_data) : num_pregunta === 8 ? set_respuesta_ocho(update_data) : num_pregunta === 9 ? set_respuesta_nueve(update_data) : 
+
+            dispatch (num_pregunta === 1 ? set_respuesta_uno(update_data) : 
+                      num_pregunta === 2 ? set_respuesta_dos (update_data) : 
+                      num_pregunta === 3 ? set_respuesta_tres(update_data) :
+                      num_pregunta === 4 ? set_respuesta_cuatro (update_data) : 
+                      num_pregunta === 5 ? set_respuesta_cinco(update_data) : 
+                      num_pregunta === 6 ? set_respuesta_seis(update_data) :
+                      num_pregunta === 7 ? set_respuesta_siete (update_data) : 
+                      num_pregunta === 8 ? set_respuesta_ocho(update_data) : 
+                      num_pregunta === 9 ? set_respuesta_nueve(update_data) : 
                       num_pregunta === 10 ? set_respuesta_diez (update_data) :
-
-                      num_pregunta === 11 ? set_respuesta_once(update_data) : num_pregunta === 12 ? set_respuesta_doce (update_data) : num_pregunta === 13 ? set_respuesta_trece(update_data) :
-                      num_pregunta === 14 ? set_respuesta_catorce (update_data) : num_pregunta === 15 ? set_respuesta_quince(update_data) : num_pregunta === 16 ? set_respuesta_diezyseis(update_data) :
-                      num_pregunta === 17 ? set_respuesta_diezysiete (update_data) : num_pregunta === 18 ? set_respuesta_diezyocho(update_data) : num_pregunta === 19 ? set_respuesta_diezynueve(update_data) :
+                      num_pregunta === 11 ? set_respuesta_once(update_data) : 
+                      num_pregunta === 12 ? set_respuesta_doce (update_data) : 
+                      num_pregunta === 13 ? set_respuesta_trece(update_data) :
+                      num_pregunta === 14 ? set_respuesta_catorce (update_data) : 
+                      num_pregunta === 15 ? set_respuesta_quince(update_data) : 
+                      num_pregunta === 16 ? set_respuesta_diezyseis(update_data) :
+                      num_pregunta === 17 ? set_respuesta_diezysiete (update_data) : 
+                      num_pregunta === 18 ? set_respuesta_diezyocho(update_data) : 
+                      num_pregunta === 19 ? set_respuesta_diezynueve(update_data) :
                       num_pregunta === 20 ? set_respuesta_veinte (update_data) :
-
-                      num_pregunta === 21 ? set_respuesta_veinteyuno(update_data) : num_pregunta === 22 ? set_respuesta_veinteydos (update_data) : num_pregunta === 23 ? set_respuesta_veinteytres(update_data) :
-                      num_pregunta === 24 ? set_respuesta_veinteycuatro (update_data) : num_pregunta === 25 ? set_respuesta_veinteycinco(update_data) : num_pregunta === 26 ? set_respuesta_veinteyseis(update_data) :
-                      num_pregunta === 27 ? set_respuesta_veinteysiete (update_data) : num_pregunta === 28 ? set_respuesta_veinteyocho(update_data) : num_pregunta === 29 ? set_respuesta_veinteynueve(update_data) : 
+                      num_pregunta === 21 ? set_respuesta_veinteyuno(update_data) : 
+                      num_pregunta === 22 ? set_respuesta_veinteydos (update_data) : 
+                      num_pregunta === 23 ? set_respuesta_veinteytres(update_data) :
+                      num_pregunta === 24 ? set_respuesta_veinteycuatro (update_data) : 
+                      num_pregunta === 25 ? set_respuesta_veinteycinco(update_data) : 
+                      num_pregunta === 26 ? set_respuesta_veinteyseis(update_data) :
+                      num_pregunta === 27 ? set_respuesta_veinteysiete (update_data) : 
+                      num_pregunta === 28 ? set_respuesta_veinteyocho(update_data) : 
+                      num_pregunta === 29 ? set_respuesta_veinteynueve(update_data) : 
                       num_pregunta === 30 ? set_respuesta_treinta (update_data) :
-                      
-                      num_pregunta === 31 ? set_respuesta_treintayuno(update_data) : num_pregunta === 32 ? set_respuesta_treintaydos (update_data) : num_pregunta === 33 ? set_respuesta_treintaytres(update_data) :
-                      num_pregunta === 34 ? set_respuesta_treintaycuatro (update_data) : num_pregunta === 35 ? set_respuesta_treintaycinco(update_data) : num_pregunta === 36 ? set_respuesta_treintayseis(update_data) :
-                      num_pregunta === 37 ? set_respuesta_treintaysiete (update_data) : num_pregunta === 38 ? set_respuesta_treintayocho(update_data) : num_pregunta === 39 ? set_respuesta_treintaynueve(update_data) : 
-                      set_respuesta_cuarenta (update_data))
+                      num_pregunta === 31 ? set_respuesta_treintayuno(update_data) : 
+                      num_pregunta === 32 ? set_respuesta_treintaydos (update_data) : 
+                      num_pregunta === 33 ? set_respuesta_treintaytres(update_data) :
+                      num_pregunta === 34 ? set_respuesta_treintaycuatro (update_data) : 
+                      num_pregunta === 35 ? set_respuesta_treintaycinco(update_data) : 
+                      num_pregunta === 36 ? set_respuesta_treintayseis(update_data) :
+                      num_pregunta === 37 ? set_respuesta_treintaysiete (update_data) : 
+                      num_pregunta === 38 ? set_respuesta_treintayocho(update_data) : 
+                      num_pregunta === 39 ? set_respuesta_treintaynueve(update_data) : 
+                                            set_respuesta_cuarenta (update_data))
             dispatch(set_id_pregunta(parseFloat(id_pregunta) + 1))
             dispatch(set_nro_pregunta(num_pregunta + 1))
             dispatch(preguntasdata(preguntasConstants({}, false, parseFloat(id_pregunta) + 1, 'preguntas_categoria_cuatro').get_pregunta))
@@ -105,17 +128,11 @@ export default function CategoriaCuatroPreguntas ({navigation}) {
         }
     }
 
-    const repetir_examen = () => {
-        if (opcion !== ''){
-            setOpcion ('')
-            dispatch(set_nro_pregunta(39))
-            dispatch(preguntasdata(preguntasConstants({}, false, id_inicial, 'preguntas_categoria_cuatro').get_pregunta))
-        }
-    }
-
     return (
         <GestureHandlerRootView style={{flex: 1, width: '100%'}}>
+            
             <BarraSuperior navigation={navigation} categoria={'CATEGORÍA 4 - A3A'} nro_categoria={'preguntas_categoria_cuatro'}/>
+            
             <View style={styles.container}>
                 <Text style={styles.texto_pregunta}>{pregunta}</Text>
                 {
@@ -145,14 +162,9 @@ export default function CategoriaCuatroPreguntas ({navigation}) {
 
                 {
                     nro_pregunta === 40 ? (
-                        <View style={styles.container_botones}>
-                            <TouchableOpacity style={[styles.boton_finalizar, {backgroundColor: '#ff0000', marginBottom: 11}]} onPress={() => finalizar_cuestionario()}>
-                                <Text style={styles.texto_finalizar}>Finalizar</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={[styles.boton_finalizar, {backgroundColor: 'black', marginBottom: 0}]} onPress={() => repetir_examen()}>
-                                <Text style={styles.texto_finalizar}>Repetir examen</Text>
-                            </TouchableOpacity>
-                        </View>
+                        <TouchableOpacity style={[styles.boton_siguiente, {backgroundColor: '#ff0000', marginBottom: 11}]} onPress={() => finalizar_cuestionario()}>
+                            <Text style={styles.texto_finalizar}>Finalizar</Text>
+                        </TouchableOpacity>
                     ) : (
                         <TouchableOpacity style={styles.boton_siguiente} onPress={() => siguiente_pregunta()}>
                             <Text style={styles.texto_siguiente}>Siguiente</Text>
@@ -160,6 +172,14 @@ export default function CategoriaCuatroPreguntas ({navigation}) {
                     )
                 }
             </View>
+            
+            {
+              begin.loading ? ( 
+                <View style={styles.view_loading}>
+                  <Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                </View>
+              ) : null
+            }
         </GestureHandlerRootView>
     )
 
@@ -233,5 +253,16 @@ const styles = StyleSheet.create({
     },
     texto_siguiente: {
         fontFamily: 'Nunito-Bold', fontSize: 25, lineHeight: 58, color: 'white', textAlign: 'center'
+    },
+    view_loading: {
+      position: 'absolute',
+      backgroundColor: 'rgba(255, 255, 255, 0.4)',
+      width: '100%',
+      height: '100%',
+      justifyContent: 'center',
+      alignSelf: 'center'
+    },
+    icono_loading: {
+      width: '100%'
     }
 })

@@ -5,7 +5,7 @@ import { GestureHandlerRootView, TouchableOpacity } from 'react-native-gesture-h
 import BarraSuperiorRespuestas from '../comun/barrasuperiorrespuestas'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useIsFocused, useRoute } from '@react-navigation/native'
+import { useIsFocused } from '@react-navigation/native'
 import {preguntasdata} from '../../../redux/slice/preguntasdata'
 import { preguntasConstants } from '../../../redux/uri/preguntas-constants'
 import { useEffect } from 'react'
@@ -16,24 +16,16 @@ export default function CategoriaTresRespuestas ({navigation}) {
     const dispatch = useDispatch ()
     const isFocused = useIsFocused()
 
-    const [opcion,   setOpcion]   = useState ('')
     const [tipo_pregunta, setTipoPregunta] = useState ('')
     const [pregunta, setPregunta] = useState ('')
     const [opcion_a, setOpcionA]  = useState ('')
     const [opcion_b, setOpcionB]  = useState ('')
     const [opcion_c, setOpcionC]  = useState ('')
     const [opcion_d, setOpcionD]  = useState ('')
-    const [respuesta_correcta, setRespuestaCorrecta]  = useState ('')
 
-    const [respuesta_usuario, setRespuestaUsuario] = useState ('')
-    const [correcta_usuario, setCorrectaUsuario] = useState (false)
-
+    const begin = useSelector(({begin}) => begin)
     const {get_pregunta} = useSelector(({preguntas}) => preguntas)
-    const {id_pregunta, nro_pregunta, nro_categoria, 
-      respuesta_uno, respuesta_dos, respuesta_tres, respuesta_cuatro, respuesta_cinco, respuesta_seis, respuesta_siete, respuesta_ocho, respuesta_nueve, respuesta_diez,
-      respuesta_once, respuesta_doce, respuesta_trece, respuesta_catorce, respuesta_quince, respuesta_diezyseis, respuesta_diezysiete, respuesta_diezyocho, respuesta_diezynueve, respuesta_veinte, 
-      respuesta_veinteyuno, respuesta_veinteydos, respuesta_veinteytres, respuesta_veinteycuatro, respuesta_veinteycinco, respuesta_veinteyseis, respuesta_veinteysiete, respuesta_veinteyocho, respuesta_veinteynueve, respuesta_treinta,
-      respuesta_treintayuno, respuesta_treintaydos, respuesta_treintaytres, respuesta_treintaycuatro, respuesta_treintaycinco, respuesta_treintayseis, respuesta_treintaysiete, respuesta_treintayocho, respuesta_treintaynueve, respuesta_cuarenta} = useSelector (({datareducer}) => datareducer)
+    const {id_pregunta, nro_pregunta, nro_categoria, lista_respuestas} = useSelector (({datareducer}) => datareducer)
 
 
     useEffect (() => {
@@ -43,30 +35,20 @@ export default function CategoriaTresRespuestas ({navigation}) {
     }, [isFocused])
 
     useEffect (() => {
-        if (get_pregunta && get_pregunta.pregunta){
+        if ((get_pregunta && get_pregunta.pregunta)){
             setPregunta(get_pregunta.pregunta.pregunta)
             setTipoPregunta(get_pregunta.pregunta.tipo_pregunta)
             setOpcionA(get_pregunta.pregunta.opcion_a)
             setOpcionB(get_pregunta.pregunta.opcion_b)
             setOpcionC(get_pregunta.pregunta.opcion_c)
             setOpcionD(get_pregunta.pregunta.opcion_d)
-            setRespuestaCorrecta (get_pregunta.pregunta.respuesta)
-
-            setRespuestaUsuario(nro_pregunta === 1 ? respuesta_uno.usuario : nro_pregunta === 2 ? respuesta_dos.usuario : nro_pregunta === 3 ? respuesta_tres.usuario : nro_pregunta === 4 ? respuesta_cuatro.usuario : nro_pregunta === 5 ? respuesta_cinco.usuario : nro_pregunta === 6 ? respuesta_seis.usuario : nro_pregunta === 7 ? respuesta_siete.usuario : nro_pregunta === 8 ? respuesta_ocho.usuario : nro_pregunta === 9 ? respuesta_nueve.usuario : nro_pregunta === 10 ? respuesta_diez.usuario :
-                                nro_pregunta === 11 ? respuesta_once.usuario : nro_pregunta === 12 ? respuesta_doce.usuario : nro_pregunta === 13 ? respuesta_trece.usuario : nro_pregunta === 14 ? respuesta_catorce.usuario : nro_pregunta === 15 ? respuesta_quince.usuario : nro_pregunta === 16 ? respuesta_diezyseis.usuario : nro_pregunta === 17 ? respuesta_diezysiete.usuario : nro_pregunta === 18 ? respuesta_diezyocho.usuario : nro_pregunta === 19 ? respuesta_diezynueve.usuario : nro_pregunta === 20 ? respuesta_veinte.usuario :
-                                nro_pregunta === 21 ? respuesta_veinteyuno.usuario : nro_pregunta === 22 ? respuesta_veinteydos.usuario : nro_pregunta === 23 ? respuesta_veinteytres.usuario : nro_pregunta === 24 ? respuesta_veinteycuatro.usuario : nro_pregunta === 25 ? respuesta_veinteycinco.usuario : nro_pregunta === 26 ? respuesta_veinteyseis.usuario : nro_pregunta === 27 ? respuesta_veinteysiete.usuario : nro_pregunta === 28 ? respuesta_veinteyocho.usuario : nro_pregunta === 29 ? respuesta_veinteynueve.usuario : nro_pregunta === 30 ? respuesta_treinta.usuario :
-                                nro_pregunta === 31 ? respuesta_treintayuno.usuario : nro_pregunta === 32 ? respuesta_treintaydos.usuario : nro_pregunta === 33 ? respuesta_treintaytres.usuario : nro_pregunta === 34 ? respuesta_treintaycuatro.usuario : nro_pregunta === 35 ? respuesta_treintaycinco.usuario : nro_pregunta === 36 ? respuesta_treintayseis.usuario : nro_pregunta === 37 ? respuesta_treintaysiete.usuario : nro_pregunta === 38 ? respuesta_treintayocho.usuario : nro_pregunta === 39 ? respuesta_treintaynueve.usuario : respuesta_cuarenta.usuario)
-
-            setCorrectaUsuario(nro_pregunta === 1 ? respuesta_uno.correcta : nro_pregunta === 2 ? respuesta_dos.correcta : nro_pregunta === 3 ? respuesta_tres.correcta : nro_pregunta === 4 ? respuesta_cuatro.correcta : nro_pregunta === 5 ? respuesta_cinco.correcta : nro_pregunta === 6 ? respuesta_seis.correcta : nro_pregunta === 7 ? respuesta_siete.correcta : nro_pregunta === 8 ? respuesta_ocho.correcta : nro_pregunta === 9 ? respuesta_nueve.correcta : nro_pregunta === 10 ? respuesta_diez.correcta :
-                                nro_pregunta === 11 ? respuesta_once.correcta : nro_pregunta === 12 ? respuesta_doce.correcta : nro_pregunta === 13 ? respuesta_trece.correcta : nro_pregunta === 14 ? respuesta_catorce.correcta : nro_pregunta === 15 ? respuesta_quince.correcta : nro_pregunta === 16 ? respuesta_diezyseis.correcta : nro_pregunta === 17 ? respuesta_diezysiete.correcta : nro_pregunta === 18 ? respuesta_diezyocho.correcta : nro_pregunta === 19 ? respuesta_diezynueve.correcta : nro_pregunta === 20 ? respuesta_veinte.correcta :
-                                nro_pregunta === 21 ? respuesta_veinteyuno.correcta : nro_pregunta === 22 ? respuesta_veinteydos.correcta : nro_pregunta === 23 ? respuesta_veinteytres.correcta : nro_pregunta === 24 ? respuesta_veinteycuatro.correcta : nro_pregunta === 25 ? respuesta_veinteycinco.correcta : nro_pregunta === 26 ? respuesta_veinteyseis.correcta : nro_pregunta === 27 ? respuesta_veinteysiete.correcta : nro_pregunta === 28 ? respuesta_veinteyocho.correcta : nro_pregunta === 29 ? respuesta_veinteynueve.correcta : nro_pregunta === 30 ? respuesta_treinta.correcta :
-                                nro_pregunta === 31 ? respuesta_treintayuno.correcta : nro_pregunta === 32 ? respuesta_treintaydos.correcta : nro_pregunta === 33 ? respuesta_treintaytres.correcta : nro_pregunta === 34 ? respuesta_treintaycuatro.correcta : nro_pregunta === 35 ? respuesta_treintaycinco.correcta : nro_pregunta === 36 ? respuesta_treintayseis.correcta : nro_pregunta === 37 ? respuesta_treintaysiete.correcta : nro_pregunta === 38 ? respuesta_treintayocho.correcta : nro_pregunta === 39 ? respuesta_treintaynueve.correcta : respuesta_cuarenta.usuario)
         }
     }, [get_pregunta])
 
     const siguiente_pregunta = () => {
         dispatch(set_nro_pregunta(nro_pregunta + 1))
         dispatch(set_id_pregunta(parseFloat(id_pregunta) + 1))
+        dispatch(preguntasdata(preguntasConstants({}, true, parseFloat(id_pregunta) + 1, 0).get_pregunta))
         dispatch(preguntasdata(preguntasConstants({}, false, parseFloat(id_pregunta) + 1, 'preguntas_categoria_tres').get_pregunta))
     }
 
@@ -77,17 +59,20 @@ export default function CategoriaTresRespuestas ({navigation}) {
 
     return (
         <GestureHandlerRootView style={{flex: 1, width: '100%'}}>
-            <BarraSuperiorRespuestas navigation={navigation} categoria={'CATEGORÍA 3 - A2A'} nro_categoria={nro_categoria} correcta={correcta_usuario}/>
+            
+            <BarraSuperiorRespuestas navigation={navigation} categoria={'CATEGORÍA 1 - B2A'} nro_categoria={nro_categoria}
+                    correcta={lista_respuestas[nro_pregunta - 1].correcta}/>
+            
             <View style={styles.container}>
                 <Text style={styles.texto_pregunta}>{pregunta}</Text>
                 {
-                    tipo_pregunta === '0' ? (
-                        respuesta_correcta === 'a' ? (
+                    (get_pregunta && get_pregunta.pregunta) && tipo_pregunta === '0' ? (
+                        get_pregunta.pregunta.respuesta === 'a' ? (
                             <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(4, 194, 0, 0.2)',  borderColor: '#04C200', borderWidth: 2}]}>
                                 <Image source={ICON.RESULTADOS_RADIO_BUTTON_GREEN} style={styles.radio_select}/>
                                 <Text style={styles.texto_opcion}>{opcion_a}</Text>
                             </TouchableOpacity>
-                        ) : respuesta_correcta !== 'a' && respuesta_usuario === 'a'  ? (
+                        ) : get_pregunta.pregunta.respuesta !== 'a' && lista_respuestas[nro_pregunta - 1].usuario === 'a'  ? (
                             <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(255, 0, 0, 0.2)',  borderColor: '#ff0000', borderWidth: 2}]}>
                                 <Image source={ICON.RESULTADOS_RADIO_BUTTON_RED} style={styles.radio_select}/>
                                 <Text style={styles.texto_opcion}>{opcion_a}</Text>
@@ -105,12 +90,12 @@ export default function CategoriaTresRespuestas ({navigation}) {
                     ) :null
                 }
                 {
-                    respuesta_correcta === 'b' ? (
+                    (get_pregunta && get_pregunta.pregunta) && get_pregunta.pregunta.respuesta === 'b' ? (
                         <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(4, 194, 0, 0.2)',  borderColor: '#04C200', borderWidth: 2}]}>
                             <Image source={ICON.RESULTADOS_RADIO_BUTTON_GREEN} style={styles.radio_select}/>
                             <Text style={styles.texto_opcion}>{opcion_b}</Text>
                         </TouchableOpacity>
-                    ) : respuesta_correcta !== 'b' && respuesta_usuario === 'b'  ? (
+                    ) : (get_pregunta && get_pregunta.pregunta) && get_pregunta.pregunta.respuesta !== 'b' && lista_respuestas[nro_pregunta - 1].usuario === 'b'  ? (
                         <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(255, 0, 0, 0.2)',  borderColor: '#ff0000', borderWidth: 2}]}>
                             <Image source={ICON.RESULTADOS_RADIO_BUTTON_RED} style={styles.radio_select}/>
                             <Text style={styles.texto_opcion}>{opcion_b}</Text>
@@ -123,12 +108,12 @@ export default function CategoriaTresRespuestas ({navigation}) {
                     )
                 }
                 {
-                    respuesta_correcta === 'c' ? (
+                    (get_pregunta && get_pregunta.pregunta) && get_pregunta.pregunta.respuesta === 'c' ? (
                         <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(4, 194, 0, 0.2)',  borderColor: '#04C200', borderWidth: 2}]}>
                             <Image source={ICON.RESULTADOS_RADIO_BUTTON_GREEN} style={styles.radio_select}/>
                             <Text style={styles.texto_opcion}>{opcion_c}</Text>
                         </TouchableOpacity>
-                    ) : respuesta_correcta !== 'c' && respuesta_usuario === 'c'  ? (
+                    ) : (get_pregunta && get_pregunta.pregunta) && get_pregunta.pregunta.respuesta !== 'c' && lista_respuestas[nro_pregunta - 1].usuario === 'c'  ? (
                         <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(255, 0, 0, 0.2)',  borderColor: '#ff0000', borderWidth: 2}]}>
                             <Image source={ICON.RESULTADOS_RADIO_BUTTON_RED} style={styles.radio_select}/>
                             <Text style={styles.texto_opcion}>{opcion_c}</Text>
@@ -141,12 +126,12 @@ export default function CategoriaTresRespuestas ({navigation}) {
                     )
                 }
                 {
-                    respuesta_correcta === 'd' ? (
+                    (get_pregunta && get_pregunta.pregunta) && get_pregunta.pregunta.respuesta === 'd' ? (
                         <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(4, 194, 0, 0.2)',  borderColor: '#04C200', borderWidth: 2}]}>
                             <Image source={ICON.RESULTADOS_RADIO_BUTTON_GREEN} style={styles.radio_select}/>
                             <Text style={styles.texto_opcion}>{opcion_d}</Text>
                         </TouchableOpacity>
-                    ) : respuesta_correcta !== 'd' && respuesta_usuario === 'd'  ? (
+                    ) : (get_pregunta && get_pregunta.pregunta) && get_pregunta.pregunta.respuesta !== 'd' && lista_respuestas[nro_pregunta - 1].usuario === 'd'  ? (
                         <TouchableOpacity style={[styles.opcion_respuesta, {backgroundColor: 'rgba(255, 0, 0, 0.2)',  borderColor: '#ff0000', borderWidth: 2}]}>
                             <Image source={ICON.RESULTADOS_RADIO_BUTTON_RED} style={styles.radio_select}/>
                             <Text style={styles.texto_opcion}>{opcion_d}</Text>
@@ -172,6 +157,13 @@ export default function CategoriaTresRespuestas ({navigation}) {
                 }
 
             </View>
+            {
+              begin.loading ? ( 
+                <View style={styles.view_loading}>
+                  <Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                </View>
+              ) : null
+            }
         </GestureHandlerRootView>
     )
 

@@ -3,16 +3,32 @@ import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity } from
 import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
 
 import {ICON} from '../../assets/constants/images'
+import { useDispatch, useSelector } from 'react-redux';
+import {begindata} from '../../redux/slice/begindata';
+import { beginConstants } from '../../redux/uri/begin-constants';
 
 export default function RestablecerPassScreen ({navigation}) {
 
-  const [nombres_apellidos, setNombresApellidos] = useState ('')
+  const dispatch = useDispatch()
+
   const [correo, setCorreo] = useState ('')
-  const [password, setPassword] = useState ('')
-  const [confirmar_password, setConfirmarPassword] = useState ('')
+
+  const {forgot_password} = useSelector(({begin}) => begin)
+  const begin = useSelector (({begin}) => begin)
+
+  useEffect(() => {
+    if (forgot_password){
+      navigation.navigate('LoginScreen')
+    }
+  }, [forgot_password])
 
     const enviar_correo = () => {
-      navigation.navigate ('ActualizarPassScreen')
+      console.log(correo)
+      const envio_correo = {
+        email: correo
+      }
+      console.log(envio_correo)
+      dispatch(begindata(beginConstants(envio_correo, false, 0, 0).forgot_password))
     }
 
     return (
@@ -30,8 +46,8 @@ export default function RestablecerPassScreen ({navigation}) {
 
               <TextInput
                 style={[styles.input]}
-                value={confirmar_password}
-                onChange={(confirmar_password) => setConfirmarPassword(confirmar_password)}
+                value={correo}
+                onChangeText={(correo) => setCorreo(correo)}
                 placeholder='Introducir email'
                 placeholderTextColor='#252525'
                 ref={(input) => { text_correo = input }}
@@ -43,6 +59,13 @@ export default function RestablecerPassScreen ({navigation}) {
                   <Text style={styles.texto_enviar}>Enviar</Text>
               </TouchableOpacity>
             </View>
+            {
+              begin.loading ? ( 
+                <View style={styles.view_loading}>
+                  <Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                </View>
+              ) : null
+            }
             
         </GestureHandlerRootView>
     )

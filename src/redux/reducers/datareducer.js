@@ -1,6 +1,7 @@
 import { datatypes } from "../actions/dataactions";
 
 const initialState = {
+    lista_respuestas: [],
     menu_open: false,
     id_pregunta: 0,
     nro_pregunta: 1,
@@ -53,6 +54,12 @@ const datareducer = (state = initialState, action) => {
         return {
             ... state,
             menu_open
+        }
+    }else if (action.type === datatypes.SET_LISTA_RESPUESTAS){
+        const lista_respuestas = action.lista_respuestas
+        return {
+            ... state,
+            lista_respuestas
         }
     }else if (action.type === datatypes.SET_ID_PREGUNTA){
         const id_pregunta = action.id_pregunta

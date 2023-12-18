@@ -67,6 +67,7 @@ export default function ActualizarDatosScreen ({navigation}) {
                 returnKeyType='next'/>
 
               <TextInput
+                editable={false}
                 style={[[styles.input, {marginBottom: 22}]]}
                 value={correo}
                 onChange={(correo) => setCorreo(correo)}
@@ -77,27 +78,27 @@ export default function ActualizarDatosScreen ({navigation}) {
                 returnKeyType='next'
                 autoCapitalize='none'/>
 
-              <TextInput
-                style={[[styles.input, {marginBottom: 22}]]}
-                value={password}
+              <View
+                style={[[styles.view_input, {marginBottom: 22}]]}
+                /**value={password}
                 onChange={(password) => setPassword(password)}
                 placeholder='Contraseña '
                 placeholderTextColor='#ffffff'
                 ref={(input) => { text_contraseña = input }}
                 onSubmitEditing={() => text_confirmar.focus()}
                 returnKeyType='next'
-                autoCapitalize='none'/>
+                autoCapitalize='none'**//>
 
-              <TextInput
-                style={[styles.input, {marginBottom: 42}]}
-                value={confirmar_password}
+              <View
+                style={[styles.view_input, {marginBottom: 42}]}
+                /**value={confirmar_password}
                 onChange={(confirmar_password) => setConfirmarPassword(confirmar_password)}
                 placeholder='Confirmar contraseña '
                 placeholderTextColor='#ffffff'
                 ref={(input) => { text_contraseña = input }}
                 onSubmitEditing={() => actualizar_datos()}
                 returnKeyType='done'
-                autoCapitalize='none'/>
+                autoCapitalize='none'**//>
               
               <TouchableOpacity style={[styles.boton]} onPress={() => actualizar_datos()}>
                   <Text style={styles.texto_actualizar}>Actualizar datos</Text>
@@ -151,6 +152,17 @@ const styles = StyleSheet.create({
     height: 43, 
     alignContent: 'center',
     borderColor: '#ffffff',
+    borderWidth: 1,
+    borderRadius: 40,
+    paddingLeft: 26,
+    color: '#ffffff',
+    alignSelf: 'center'
+  },
+  view_input: {
+    width: 284,
+    height: 43, 
+    alignContent: 'center',
+    borderColor: '#ff0000',
     borderWidth: 1,
     borderRadius: 40,
     paddingLeft: 26,

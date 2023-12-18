@@ -7,7 +7,8 @@ import { useIsFocused } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import {preguntasdata} from '../../redux/slice/preguntasdata';
 import { preguntasConstants } from '../../redux/uri/preguntas-constants';
-import { set_id_pregunta, set_nro_pregunta } from '../../redux/actions/dataactions';
+import { set_id_pregunta, set_lista_respuestas, set_menu_open, set_nro_pregunta } from '../../redux/actions/dataactions';
+import Menu from './menu/menu';
 
 export default function ResultadosScreen ({navigation}) {
 
@@ -16,14 +17,20 @@ export default function ResultadosScreen ({navigation}) {
 
     const [resultados, setResultados] = useState(0)
     const [nro_correctas, setNroCorrectas] = useState (0)
+    const [lista_respuestas, setListaRespuestas] = useState ([])
 
     const {nro_categoria, 
-      respuesta_uno, respuesta_dos, respuesta_tres, respuesta_cuatro, respuesta_cinco, respuesta_seis, respuesta_siete, respuesta_ocho, respuesta_nueve, respuesta_diez,
-      respuesta_once, respuesta_doce, respuesta_trece, respuesta_catorce, respuesta_quince, respuesta_diezyseis, respuesta_diezysiete, respuesta_diezyocho, respuesta_diezynueve, respuesta_veinte, 
-      respuesta_veinteyuno, respuesta_veinteydos, respuesta_veinteytres, respuesta_veinteycuatro, respuesta_veinteycinco, respuesta_veinteyseis, respuesta_veinteysiete, respuesta_veinteyocho, respuesta_veinteynueve, respuesta_treinta,
-      respuesta_treintayuno, respuesta_treintaydos, respuesta_treintaytres, respuesta_treintaycuatro, respuesta_treintaycinco, respuesta_treintayseis, respuesta_treintaysiete, respuesta_treintayocho, respuesta_treintaynueve, respuesta_cuarenta} = useSelector (({datareducer}) => datareducer)
+           respuesta_uno, respuesta_dos, respuesta_tres, respuesta_cuatro, respuesta_cinco, respuesta_seis, respuesta_siete, respuesta_ocho, respuesta_nueve, 
+           respuesta_diez, respuesta_once, respuesta_doce, respuesta_trece, respuesta_catorce, respuesta_quince, respuesta_diezyseis, respuesta_diezysiete, 
+           respuesta_diezyocho, respuesta_diezynueve, respuesta_veinte, respuesta_veinteyuno, respuesta_veinteydos, respuesta_veinteytres, respuesta_veinteycuatro, 
+           respuesta_veinteycinco, respuesta_veinteyseis, respuesta_veinteysiete, respuesta_veinteyocho, respuesta_veinteynueve, respuesta_treinta,
+           respuesta_treintayuno, respuesta_treintaydos, respuesta_treintaytres, respuesta_treintaycuatro, respuesta_treintaycinco, respuesta_treintayseis, 
+           respuesta_treintaysiete, respuesta_treintayocho, respuesta_treintaynueve, respuesta_cuarenta} = useSelector (({datareducer}) => datareducer)
 
+    const {menu_open} = useSelector(({datareducer}) => datareducer)
     const {get_preguntas} = useSelector(({preguntas}) => preguntas)
+    const begin = useSelector(({begin}) => begin)
+
     const [boton, setBoton] = useState (false)
 
     useEffect (() => {
@@ -34,34 +41,37 @@ export default function ResultadosScreen ({navigation}) {
 
     useEffect (() => {
       if (get_preguntas && get_preguntas.preguntas && boton === true){
-        console.log ('get', get_preguntas)
         dispatch (preguntasdata(preguntasConstants({}, true, 0, 0).get_preguntas))
         dispatch (set_id_pregunta(get_preguntas.preguntas[0].id))
         dispatch (set_nro_pregunta(1))
         navigation.navigate(nro_categoria === '1' ? 'CategoriaUnoRespuestas' : nro_categoria === '2' ? 'CategoriaDosRespuestas' :
-                            nro_categoria === '3' ? 'CategoriaTresStack' : nro_categoria === '4' ? 'CategoriaCuatroStack' : 
-                            'CategoriaCincoStack')
+                            nro_categoria === '3' ? 'CategoriaTresRespuestas' : nro_categoria === '4' ? 'CategoriaCuatroRespuestas' : 
+                            'CategoriaCincoRespuestas')
       }
     }, [get_preguntas, boton])
 
     const calcular_resultados = () => {
-      const resultado = parseFloat(respuesta_uno.correcta ? 1 : 0) + parseFloat(respuesta_dos.correcta ? 1 : 0) + parseFloat(respuesta_tres.correcta ? 1 : 0) + 
-       parseFloat(respuesta_cuatro.correcta ? 1 : 0) + parseFloat(respuesta_cinco.correcta ? 1 : 0) + parseFloat(respuesta_seis.correcta ? 1 : 0) + 
-       parseFloat(respuesta_siete.correcta ? 1 : 0) + parseFloat(respuesta_ocho.correcta ? 1 : 0) + parseFloat(respuesta_nueve.correcta ? 1 : 0) + 
-       parseFloat(respuesta_diez.correcta ? 1 : 0) + parseFloat(respuesta_once.correcta ? 1 : 0) + parseFloat(respuesta_doce.correcta ? 1 : 0) + 
-       parseFloat(respuesta_trece.correcta ? 1 : 0) + parseFloat(respuesta_catorce.correcta ? 1 : 0) + parseFloat(respuesta_quince.correcta ? 1 : 0) + 
-       parseFloat(respuesta_diezyseis.correcta ? 1 : 0) + parseFloat(respuesta_diezysiete.correcta ? 1 : 0) + parseFloat(respuesta_diezyocho.correcta ? 1 : 0) +
-       parseFloat(respuesta_diezynueve.correcta ? 1 : 0) + parseFloat(respuesta_veinte.correcta ? 1 : 0) + parseFloat(respuesta_veinteyuno.correcta ? 1 : 0) + 
-       parseFloat(respuesta_veinteydos.correcta ? 1 : 0) + parseFloat(respuesta_veinteytres.correcta ? 1 : 0) + parseFloat(respuesta_veinteycuatro.correcta ? 1 : 0) + 
-       parseFloat(respuesta_veinteycinco.correcta ? 1 : 0) + parseFloat(respuesta_veinteyseis.correcta ? 1 : 0) + parseFloat(respuesta_veinteysiete.correcta ? 1 : 0) +
-       parseFloat(respuesta_veinteyocho.correcta ? 1 : 0) + parseFloat(respuesta_veinteynueve.correcta ? 1 : 0) + parseFloat(respuesta_treinta.correcta ? 1 : 0) +
-       parseFloat(respuesta_treintayuno.correcta ? 1 : 0) + parseFloat(respuesta_treintaydos.correcta ? 1 : 0) + parseFloat(respuesta_treintaytres.correcta ? 1 : 0) + 
-       parseFloat(respuesta_treintaycuatro.correcta ? 1 : 0) + parseFloat(respuesta_treintaycinco.correcta ? 1 : 0) + parseFloat(respuesta_treintayseis.correcta ? 1 : 0)
-       + parseFloat(respuesta_treintaysiete.correcta ? 1 : 0) + parseFloat(respuesta_treintayocho.correcta ? 1 : 0) + parseFloat(respuesta_treintaynueve.correcta ? 1 : 0)
-       + parseFloat(respuesta_cuarenta.correcta ? 1 : 0)
+      let listas = [{'correcta': respuesta_uno.correcta, 'usuario': respuesta_uno.usuario}, {'correcta': respuesta_dos.correcta, 'usuario': respuesta_dos.usuario}, {'correcta': respuesta_tres.correcta, 'usuario': respuesta_tres.usuario},
+                    {'correcta': respuesta_cuatro.correcta, 'usuario': respuesta_cuatro.usuario}, {'correcta': respuesta_cinco.correcta, 'usuario': respuesta_cinco.usuario}, {'correcta': respuesta_seis.correcta, 'usuario': respuesta_seis.usuario},
+                    {'correcta': respuesta_siete.correcta, 'usuario': respuesta_siete.usuario},{'correcta': respuesta_ocho.correcta, 'usuario': respuesta_ocho.usuario},
+                    {'correcta': respuesta_nueve.correcta, 'usuario': respuesta_nueve.usuario},{'correcta': respuesta_diez.correcta, 'usuario': respuesta_diez.usuario},
+                    {'correcta': respuesta_once.correcta, 'usuario': respuesta_once.usuario}, {'correcta': respuesta_doce.correcta, 'usuario': respuesta_doce.usuario}, {'correcta': respuesta_trece.correcta, 'usuario': respuesta_trece.usuario},
+                    {'correcta': respuesta_catorce.correcta, 'usuario': respuesta_catorce.usuario}, {'correcta': respuesta_quince.correcta, 'usuario': respuesta_quince.usuario}, {'correcta': respuesta_diezyseis.correcta, 'usuario': respuesta_diezyseis.usuario},
+                    {'correcta': respuesta_diezysiete.correcta, 'usuario': respuesta_diezysiete.usuario},{'correcta': respuesta_diezyocho.correcta, 'usuario': respuesta_diezyocho.usuario},{'correcta': respuesta_diezynueve.correcta, 'usuario': respuesta_diezynueve.usuario},{'correcta': respuesta_veinte.correcta, 'usuario': respuesta_veinte.usuario},
+                    {'correcta': respuesta_veinteyuno.correcta, 'usuario': respuesta_veinteyuno.usuario}, {'correcta': respuesta_veinteydos.correcta, 'usuario': respuesta_veinteydos.usuario}, {'correcta': respuesta_veinteytres.correcta, 'usuario': respuesta_veinteytres.usuario},
+                    {'correcta': respuesta_veinteycuatro.correcta, 'usuario': respuesta_veinteycuatro.usuario}, {'correcta': respuesta_veinteycinco.correcta, 'usuario': respuesta_veinteycinco.usuario}, {'correcta': respuesta_veinteyseis.correcta, 'usuario': respuesta_veinteyseis.usuario},
+                    {'correcta': respuesta_veinteysiete.correcta, 'usuario': respuesta_veinteysiete.usuario},{'correcta': respuesta_veinteyocho.correcta, 'usuario': respuesta_veinteyocho.usuario},{'correcta': respuesta_veinteynueve.correcta, 'usuario': respuesta_veinteynueve.usuario},{'correcta': respuesta_treinta.correcta, 'usuario': respuesta_treinta.usuario},
+                    {'correcta': respuesta_treintayuno.correcta, 'usuario': respuesta_treintayuno.usuario}, {'correcta': respuesta_treintaydos.correcta, 'usuario': respuesta_treintaydos.usuario}, {'correcta': respuesta_treintaytres.correcta, 'usuario': respuesta_treintaytres.usuario},
+                    {'correcta': respuesta_treintaycuatro.correcta, 'usuario': respuesta_treintaycuatro.usuario}, {'correcta': respuesta_treintaycinco.correcta, 'usuario': respuesta_treintaycinco.usuario}, {'correcta': respuesta_treintayseis.correcta, 'usuario': respuesta_treintayseis.usuario},
+                    {'correcta': respuesta_treintaysiete.correcta, 'usuario': respuesta_treintaysiete.usuario},{'correcta': respuesta_treintayocho.correcta, 'usuario': respuesta_treintayocho.usuario},{'correcta': respuesta_treintaynueve.correcta, 'usuario': respuesta_treintaynueve.usuario},{'correcta': respuesta_cuarenta.correcta, 'usuario': respuesta_cuarenta.usuario}]
 
-      setNroCorrectas(resultado)
-      setResultados(parseFloat(resultado / 40) * 100)
+      let suma = 0
+      listas.map ((dato, index) => {
+        suma += dato.correcta ? 1 : 0
+      })
+      dispatch (set_lista_respuestas (listas))
+      setNroCorrectas(suma)
+      setResultados(parseFloat(suma / 40) * 100)
     }
 
     const ver_respuetas = () => {
@@ -72,22 +82,33 @@ export default function ResultadosScreen ({navigation}) {
                 'preguntas_categoria_cinco').get_preguntas))
     }
 
+    const repetir_examen = () => {
+        dispatch(set_nro_pregunta(1))
+        navigation.navigate ('SeleccionScreen')
+        /**dispatch(preguntasdata(preguntasConstants({}, false, id_inicial, 
+            nro_categoria === '1' ? 'preguntas_categoria_uno' : nro_categoria === '2' ? 'preguntas_categoria_dos' :
+            nro_categoria === '3' ? 'preguntas_categoria_tres' : nro_categoria === '4' ? 'preguntas_categoria_cuatro' : 
+            'preguntas_categoria_cuatro').get_pregunta))**/
+    }
+
     return (
         <GestureHandlerRootView style={styles.container}>
+           
             <ImageBackground style={styles.fondo} source={resultados < 90 ? ICON.RESPUESTAS_BARRA_SUPERIOR_RED : ICON.RESULTADOS_FONDO_TOP_GREEN}>
                 <View style={{flexDirection: 'row'}}>
-                  <TouchableOpacity style={[styles.menu]}>
+                  <TouchableOpacity style={[styles.menu]} onPress={() => dispatch(set_menu_open(true))}>
                       <Image source={resultados < 90 ? ICON.PANTALLA_SELECCION_MENU : ICON.RESULTADOS_MENU_GREEN}/>
                   </TouchableOpacity>
                   
-                  <View style={styles.container_titulo}>
+                  <View style={styles.container_titulo} >
                     <Text style={styles.texto_selecciona}>Simulacro</Text>
-                    <Text style={styles.texto_categoria}>{nro_categoria === '1' ? 'CATEGORÍA 1 - B2A' : nro_categoria === '2' ? 'CATEGORÍA 2 - B2B' :
-                nro_categoria === '3' ? 'CATEGORÍA 3 - A2A' : nro_categoria === '4' ? 'CATEGORÍA 4 - A3A' :
-                'CATEGORÍA 5 - A3B'}</Text>
+                    <Text style={styles.texto_categoria}>
+                        {nro_categoria === '1' ? 'CATEGORÍA 1 - B2A' : nro_categoria === '2' ? 'CATEGORÍA 2 - B2B' :
+                         nro_categoria === '3' ? 'CATEGORÍA 3 - A2A' : nro_categoria === '4' ? 'CATEGORÍA 4 - A3A' :
+                                                 'CATEGORÍA 5 - A3B'}</Text>
                   </View>
                   
-                  <TouchableOpacity style={[styles.avatar]}>
+                  <TouchableOpacity style={[styles.avatar]} onPress={() => navigation.navigate ('ActualizarDatosScreen')}>
                       <Image source={ICON.PANTALLA_SELECCION_AVATAR}/>
                   </TouchableOpacity>
                 </View>
@@ -96,6 +117,12 @@ export default function ResultadosScreen ({navigation}) {
                   <Text style={styles.texto_fueron}>Estos fueron tus</Text>
                   <Text style={styles.texto_resultados}>RESULTADOS</Text>
                 </View>
+
+                {
+                  menu_open ? (
+                    <Menu navigation={navigation}/>
+                  ) : null
+                }
             </ImageBackground>
             
             <View style={[styles.view_resultados]}>
@@ -121,11 +148,26 @@ export default function ResultadosScreen ({navigation}) {
                 <Text style={styles.titulo_seleccion}>CLASES DE MANEJO</Text>
               </View>
             </TouchableOpacity>
+
             <Text style={[styles.texto_proceso, {color: resultados < 90 ? '#FF0000' : '#04C200' }]}>
               Conoce todo sobre el proceso para obtener tu licencia de conducir</Text>
-            <TouchableOpacity style={[styles.boton_respuestas, {backgroundColor: resultados < 90 ? '#FF0000' : '#04C200' }]} onPress={() => ver_respuetas()}>
-              <Text style={styles.texto_respuestas}>Ver respuestas</Text>
-            </TouchableOpacity>
+            
+            
+           <View style={styles.container_botones}>
+                <TouchableOpacity style={[styles.boton_respuestas, {backgroundColor: resultados < 90 ? '#FF0000' : '#04C200' }]} onPress={() => ver_respuetas()}>
+                  <Text style={styles.texto_respuestas}>Ver respuestas</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.boton_finalizar, {backgroundColor: 'black', marginBottom: 0}]} onPress={() => repetir_examen()}>
+                    <Text style={styles.texto_finalizar}>Repetir examen</Text>
+                </TouchableOpacity>
+            </View>
+            {
+              begin.loading ? ( 
+                <View style={styles.view_loading}>
+                  <Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                </View>
+              ) : null
+            }
             
         </GestureHandlerRootView>
     )
@@ -252,13 +294,31 @@ const styles = StyleSheet.create({
     lineHeight: 15,
     textAlign: 'center', 
     fontFamily: 'Nunito-Bold',
-    marginBottom: 22
+    marginBottom: 15
   },
   boton_respuestas: {
     width: 270,
     height: 58,
     justifyContent: 'center',
-    borderRadius: 40
+    borderRadius: 40,
+    marginBottom: 11
+  },
+  boton_finalizar: {
+      borderRadius: 40,
+      width: 270,
+      height: 48
+  },
+  texto_finalizar: {
+      fontSize: 25,
+      lineHeight: 48,
+      color: 'white',
+      fontFamily: 'Nunito-Bold',
+      textAlign: 'center'
+  },
+  container_botones: {
+    width: '100%',
+    alignItems: 'center',
+    height: 48
   },
   texto_respuestas: {
     fontSize: 25,
@@ -266,5 +326,16 @@ const styles = StyleSheet.create({
     lineHeight: 58,
     textAlign: 'center',
     color: 'white'
+  },
+  view_loading: {
+    position: 'absolute',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignSelf: 'center'
+  },
+  icono_loading: {
+    width: '100%'
   }
 })

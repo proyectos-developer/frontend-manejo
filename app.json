@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/icono_round_96.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.wolfdeveloper.examenmanejo"
     },
     "web": {
       "favicon": "./assets/icono_round_96.png"

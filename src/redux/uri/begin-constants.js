@@ -22,5 +22,11 @@ export const beginConstants = (data = {}, reset = false, id = 0, token = 0) => {
             reset: reset,
             token: token
         },
+        forgot_password: {
+            path: `forgot-password`,
+            stateType: 'forgot_password',
+            data: data,
+            reset: reset
+        },
     }
 }
