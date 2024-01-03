@@ -5,22 +5,26 @@ import {ICON} from '../../assets/constants/images'
 
 export default function LoginScreen ({navigation}) {
 
+    /*Screen where the user chooses: to:
+     * Register or 
+     * log in
+    **/
     return (
         <GestureHandlerRootView style={styles.container}>
             <ImageBackground style={styles.fondo} source={ICON.PANTALLA_INICIO_FONDO}>
               <Image source={ICON.LOGO_WHITE_235} style={styles.logo}/>
             
-              <TouchableOpacity style={[styles.boton_grey, {top: 550}]} onPress={() => navigation.navigate('RegistroScreen')}>
+              <TouchableOpacity style={[styles.boton_grey, {top: 550}]} onPress={() => navigation.navigate('RegisterScreen')}>
                   <Text style={[styles.text_boton, {color: '#212121'}]}>Regístrate</Text>
               </TouchableOpacity>
             
-              <TouchableOpacity style={[styles.boton_red, {top: 631}]} onPress={() => navigation.navigate('InicioSesionScreen')}>
+              <TouchableOpacity style={[styles.boton_red, {top: 631}]} onPress={() => navigation.navigate('BeginSessionScreen')}>
                   <Text style={[styles.text_boton, {color: '#ffffff'}]}>Iniciar sesión</Text>
               </TouchableOpacity>
             
               <View style={styles.view_restablecer}>
                 <Text style={[styles.texto_restablecer, {color: '#ffffff', fontFamily: 'Nunito-Regular', marginRight: 5}]}>¿Has olvidado tu contraeña?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('RestablecerPassScreen')}>
+                <TouchableOpacity onPress={() => navigation.navigate('RestorePassScreen')}>
                     <Text style={[styles.texto_restablecer, {color: '#ff0000', fontFamily: 'Nunito-Bold'}]}>Click aquí</Text>
                 </TouchableOpacity>
               </View>

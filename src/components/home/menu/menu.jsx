@@ -46,15 +46,15 @@ export default function Menu ({navigation}) {
                 <Image source={ICON.CLOSE_MENU}/>
             </TouchableOpacity>
             <GestureHandlerRootView style={styles.container_lista}>
-                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('SeleccionScreen'); dispatch(set_menu_open(false))}}>
+                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('SelectionScreen'); dispatch(set_menu_open(false))}}>
                     <Text style={styles.text_item}>Categorías</Text>
                 </TouchableOpacity>
                 
-                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('ExamenMedicoScreen'); dispatch(set_menu_open(false))}}>
+                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('ClinicScreen'); dispatch(set_menu_open(false))}}>
                     <Text style={styles.text_item}>Examen médico</Text>
                 </TouchableOpacity>
                 
-                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('EscuelasManejoScreen'); dispatch(set_menu_open(false))}}>
+                <TouchableOpacity style={[styles.container_item, {marginBottom: 14}]} onPress={() => {navigation.navigate('DrivingSchoolScreen'); dispatch(set_menu_open(false))}}>
                     <Text style={styles.text_item}>Escuelas de manejo</Text>
                 </TouchableOpacity>
                 

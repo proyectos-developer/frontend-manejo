@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from 'axios'
-import { constantes } from "../uri/constantes"
+import { constants } from "../uri/constants"
 
-const baseurl = `${constantes().url_principal[0].url}`
+const baseurl = `${constants().url_principal[0].url}`
 let stateType = ''
 
 export const begindata = createAsyncThunk ('', async (params) => {
@@ -15,9 +15,7 @@ export const begindata = createAsyncThunk ('', async (params) => {
                 return {success: null}
             }else{
                 try{
-                    console.log(`${baseurl}/${params.path}`)
                     const response = await axios.post (`${baseurl}/${params.path}`, params.data)
-                    console.log(response.data)
                     return response.data
                 }catch (err){
                     return err.message
@@ -30,6 +28,19 @@ export const begindata = createAsyncThunk ('', async (params) => {
                 try{
                     const response = await axios.get (`${baseurl}/${params.path}`, 
                                         {headers: {Authorization: `Bearer ${params.token}`}})
+                    return response.data
+                }catch (err){
+                    return err.message
+                }
+            }
+        case 'update_user':
+            if (params.reset){ 
+                return {success: null}
+            }else{
+                try{
+                    console.log (`${baseurl}/${params.path}`, params.data)
+                    const response = await axios.get (`${baseurl}/${params.path}`, params.data) 
+                    console.log (response.data)
                     return response.data
                 }catch (err){
                     return err.message

@@ -1,55 +1,55 @@
 export const datatypes = {
-    SET_LISTA_RESPUESTAS: 'SET_LISTA_RESPUESTAS',
+    SET_ANSWER_LIST: 'SET_ANSWER_LIST',
     SET_MENU_OPEN: 'SET_MENU_OPEN',
-    SET_ID_PREGUNTA: 'SET_ID_PREGUNTA',
-    SET_NRO_PREGUNTA: 'SET_NRO_PREGUNTA',
-    SET_NRO_CATEGORIA: 'SET_NRO_CATEGORIA',
-    SET_RESPUESTA_UNO: 'SET_RESPUESTA_UNO',
-    SET_RESPUESTA_DOS: 'SET_RESPUESTA_DOS',
-    SET_RESPUESTA_TRES: 'SET_RESPUESTA_TRES',
-    SET_RESPUESTA_CUATRO: 'SET_RESPUESTA_CUATRO',
-    SET_RESPUESTA_CINCO: 'SET_RESPUESTA_CINCO',
-    SET_RESPUESTA_SEIS: 'SET_RESPUESTA_SEIS',
-    SET_RESPUESTA_SIETE: 'SET_RESPUESTA_SIETE',
-    SET_RESPUESTA_OCHO: 'SET_RESPUESTA_OCHO',
-    SET_RESPUESTA_NUEVE: 'SET_RESPUESTA_NUEVE',
-    SET_RESPUESTA_DIEZ: 'SET_RESPUESTA_DIEZ',
-    SET_RESPUESTA_ONCE: 'SET_RESPUESTA_ONCE',
-    SET_RESPUESTA_DOCE: 'SET_RESPUESTA_DOCE',
-    SET_RESPUESTA_TRECE: 'SET_RESPUESTA_TRECE',
-    SET_RESPUESTA_CATORCE: 'SET_RESPUESTA_CATORCE',
-    SET_RESPUESTA_QUINCE: 'SET_RESPUESTA_QUINCE',
-    SET_RESPUESTA_DIEZYSEIS: 'SET_RESPUESTA_DIEZYSEIS',
-    SET_RESPUESTA_DIEZYSIETE: 'SET_RESPUESTA_DIEZYSIETE',
-    SET_RESPUESTA_DIEZYOCHO: 'SET_RESPUESTA_DIEZYOCHO',
-    SET_RESPUESTA_DIEZYNUEVE: 'SET_RESPUESTA_DIEZYNUEVE',
-    SET_RESPUESTA_VEINTE: 'SET_RESPUESTA_VEINTE',
-    SET_RESPUESTA_VEINTEYUNO: 'SET_RESPUESTA_VEINTEYUNO',
-    SET_RESPUESTA_VEINTEYDOS: 'SET_RESPUESTA_VEINTEYDOS',
-    SET_RESPUESTA_VEINTEYTRES: 'SET_RESPUESTA_VEINTEYTRES',
-    SET_RESPUESTA_VEINTEYCUATRO: 'SET_RESPUESTA_VEINTEYCUATRO',
-    SET_RESPUESTA_VEINTEYCINCO: 'SET_RESPUESTA_VEINTEYCINCO',
-    SET_RESPUESTA_VEINTEYSEIS: 'SET_RESPUESTA_VEINTEYSEIS',
-    SET_RESPUESTA_VEINTEYSIETE: 'SET_RESPUESTA_VEINTEYSIETE',
-    SET_RESPUESTA_VEINTEYOCHO: 'SET_RESPUESTA_VEINTEYOCHO',
-    SET_RESPUESTA_VEINTEYNUEVE: 'SET_RESPUESTA_VEINTEYNUEVE',
-    SET_RESPUESTA_TREINTA: 'SET_RESPUESTA_TREINTA',
-    SET_RESPUESTA_TREINTAYUNO: 'SET_RESPUESTA_TREINTAYUNO',
-    SET_RESPUESTA_TREINTAYDOS: 'SET_RESPUESTA_TREINTAYDOS',
-    SET_RESPUESTA_TREINTAYTRES: 'SET_RESPUESTA_TREINTAYTRES',
-    SET_RESPUESTA_TREINTAYCUATRO: 'SET_RESPUESTA_TREINTAYCUATRO',
-    SET_RESPUESTA_TREINTAYCINCO: 'SET_RESPUESTA_TREINTAYCINCO',
-    SET_RESPUESTA_TREINTAYSEIS: 'SET_RESPUESTA_TREINTAYSEIS',
-    SET_RESPUESTA_TREINTAYSIETE: 'SET_RESPUESTA_TREINTAYSIETE',
-    SET_RESPUESTA_TREINTAYOCHO: 'SET_RESPUESTA_TREINTAYOCHO',
-    SET_RESPUESTA_TREINTAYNUEVE: 'SET_RESPUESTA_TREINTAYNUEVE',
-    SET_RESPUESTA_CUARENTA: 'SET_RESPUESTA_CUARENTA'
+    SET_ID_QUESTION: 'SET_ID_QUESTION',
+    SET_NUMBER_QUESTION: 'SET_NUMBER_QUESTION',
+    SET_NUMBER_CATEGORY: 'SET_NUMBER_CATEGORY',
+    SET_ANSWER_1: 'SET_ANSWER_1',
+    SET_ANSWER_2: 'SET_ANSWER_2',
+    SET_ANSWER_3: 'SET_ANSWER_3',
+    SET_ANSWER_4: 'SET_ANSWER_4',
+    SET_ANSWER_5: 'SET_ANSWER_5',
+    SET_ANSWER_6: 'SET_ANSWER_6',
+    SET_ANSWER_7: 'SET_ANSWER_7',
+    SET_ANSWER_8: 'SET_ANSWER_8',
+    SET_ANSWER_9: 'SET_ANSWER_9',
+    SET_ANSWER_10: 'SET_ANSWER_10',
+    SET_ANSWER_11: 'SET_ANSWER_11',
+    SET_ANSWER_12: 'SET_ANSWER_12',
+    SET_ANSWER_13: 'SET_ANSWER_13',
+    SET_ANSWER_14: 'SET_ANSWER_14',
+    SET_ANSWER_15: 'SET_ANSWER_15',
+    SET_ANSWER_16: 'SET_ANSWER_16',
+    SET_ANSWER_17: 'SET_ANSWER_17',
+    SET_ANSWER_18: 'SET_ANSWER_18',
+    SET_ANSWER_19: 'SET_ANSWER_19',
+    SET_ANSWER_20: 'SET_ANSWER_20',
+    SET_ANSWER_21: 'SET_ANSWER_21',
+    SET_ANSWER_22: 'SET_ANSWER_22',
+    SET_ANSWER_23: 'SET_ANSWER_23',
+    SET_ANSWER_24: 'SET_ANSWER_24',
+    SET_ANSWER_25: 'SET_ANSWER_25',
+    SET_ANSWER_26: 'SET_ANSWER_26',
+    SET_ANSWER_27: 'SET_ANSWER_27',
+    SET_ANSWER_28: 'SET_ANSWER_28',
+    SET_ANSWER_29: 'SET_ANSWER_29',
+    SET_ANSWER_30: 'SET_ANSWER_30',
+    SET_ANSWER_31: 'SET_ANSWER_31',
+    SET_ANSWER_32: 'SET_ANSWER_32',
+    SET_ANSWER_33: 'SET_ANSWER_33',
+    SET_ANSWER_34: 'SET_ANSWER_34',
+    SET_ANSWER_35: 'SET_ANSWER_35',
+    SET_ANSWER_36: 'SET_ANSWER_36',
+    SET_ANSWER_37: 'SET_ANSWER_37',
+    SET_ANSWER_38: 'SET_ANSWER_38',
+    SET_ANSWER_39: 'SET_ANSWER_39',
+    SET_ANSWER_40: 'SET_ANSWER_40'
 }
 
-export const set_lista_respuestas = lista_respuestas => {
+export const set_answer_list = answer_list => {
     return {
-        lista_respuestas, 
-        type: datatypes.SET_LISTA_RESPUESTAS
+        answer_list, 
+        type: datatypes.SET_ANSWER_LIST
     }
 }
 
@@ -60,303 +60,303 @@ export const set_menu_open = menu_open => {
     }
 }
 
-export const set_nro_pregunta = nro_pregunta => {
+export const set_number_question = number_question => {
     return {
-        nro_pregunta,
-        type: datatypes.SET_NRO_PREGUNTA
+        number_question,
+        type: datatypes.SET_NUMBER_QUESTION
     }
 }
 
-export const set_id_pregunta = id_pregunta => {
+export const set_id_question = id_question => {
     return {
-        id_pregunta,
-        type: datatypes.SET_ID_PREGUNTA
+        id_question,
+        type: datatypes.SET_ID_QUESTION
     }
 }
 
-export const set_nro_categoria = nro_categoria => {
+export const set_number_category = number_category => {
     return {
-        nro_categoria,
-        type: datatypes.SET_NRO_CATEGORIA
+        number_category,
+        type: datatypes.SET_NUMBER_CATEGORY
     }
 }
 
-export const set_respuesta_uno = respuesta_uno => {
+export const set_answer_1 = answer_1 => {
     return {
-        respuesta_uno,
-        type: datatypes.SET_RESPUESTA_UNO
+        answer_1,
+        type: datatypes.SET_ANSWER_1
     }
 }
 
-export const set_respuesta_dos = respuesta_dos => {
+export const set_answer_2 = answer_2 => {
     return {
-        respuesta_dos,
-        type: datatypes.SET_RESPUESTA_DOS
+        answer_2,
+        type: datatypes.SET_ANSWER_2
     }
 }
 
-export const set_respuesta_tres = respuesta_tres => {
+export const set_answer_3 = answer_3 => {
     return {
-        respuesta_tres,
-        type: datatypes.SET_RESPUESTA_TRES
+        answer_3,
+        type: datatypes.SET_ANSWER_3
     }
 }
 
-export const set_respuesta_cuatro = respuesta_cuatro => {
+export const set_answer_4 = answer_4 => {
     return {
-        respuesta_cuatro,
-        type: datatypes.SET_RESPUESTA_CUATRO
+        answer_4,
+        type: datatypes.SET_ANSWER_4
     }
 }
 
-export const set_respuesta_cinco = respuesta_cinco => {
+export const set_answer_5 = answer_5 => {
     return {
-        respuesta_cinco,
-        type: datatypes.SET_RESPUESTA_CINCO
+        answer_5,
+        type: datatypes.SET_ANSWER_5
     }
 }
 
-export const set_respuesta_seis = respuesta_seis => {
+export const set_answer_6 = answer_6 => {
     return {
-        respuesta_seis,
-        type: datatypes.SET_RESPUESTA_SEIS
+        answer_6,
+        type: datatypes.SET_ANSWER_6
     }
 }
 
-export const set_respuesta_siete = respuesta_siete => {
+export const set_answer_7 = answer_7 => {
     return {
-        respuesta_siete,
-        type: datatypes.SET_RESPUESTA_SIETE
+        answer_7,
+        type: datatypes.SET_ANSWER_7
     }
 }
 
-export const set_respuesta_ocho = respuesta_ocho => {
+export const set_answer_8 = answer_8 => {
     return {
-        respuesta_ocho,
-        type: datatypes.SET_RESPUESTA_OCHO
+        answer_8,
+        type: datatypes.SET_ANSWER_8
     }
 }
 
-export const set_respuesta_nueve = respuesta_nueve => {
+export const set_answer_9 = answer_9 => {
     return {
-        respuesta_nueve,
-        type: datatypes.SET_RESPUESTA_NUEVE
+        answer_9,
+        type: datatypes.SET_ANSWER_9
     }
 }
 
-export const set_respuesta_diez = respuesta_diez => {
+export const set_answer_10 = answer_10 => {
     return {
-        respuesta_diez,
-        type: datatypes.SET_RESPUESTA_DIEZ
+        answer_10,
+        type: datatypes.SET_ANSWER_10
     }
 }
 
-export const set_respuesta_once = respuesta_once => {
+export const set_answer_11 = answer_11 => {
     return {
-        respuesta_once,
-        type: datatypes.SET_RESPUESTA_ONCE
+        answer_11,
+        type: datatypes.SET_ANSWER_11
     }
 }
 
-export const set_respuesta_doce = respuesta_doce => {
+export const set_answer_12 = answer_12 => {
     return {
-        respuesta_doce,
-        type: datatypes.SET_RESPUESTA_DOCE
+        answer_12,
+        type: datatypes.SET_ANSWER_12
     }
 }
 
-export const set_respuesta_trece = respuesta_trece => {
+export const set_answer_13 = answer_13 => {
     return {
-        respuesta_trece,
-        type: datatypes.SET_RESPUESTA_TRECE
+        answer_13,
+        type: datatypes.SET_ANSWER_13
     }
 }
 
-export const set_respuesta_catorce = respuesta_catorce => {
+export const set_answer_14 = answer_14 => {
     return {
-        respuesta_catorce,
-        type: datatypes.SET_RESPUESTA_CATORCE
+        answer_14,
+        type: datatypes.SET_ANSWER_14
     }
 }
 
-export const set_respuesta_quince = respuesta_quince => {
+export const set_answer_15 = answer_15 => {
     return {
-        respuesta_quince,
-        type: datatypes.SET_RESPUESTA_QUINCE
+        answer_15,
+        type: datatypes.SET_ANSWER_15
     }
 }
 
-export const set_respuesta_diezyseis = respuesta_diezyseis => {
+export const set_answer_16= answer_16 => {
     return {
-        respuesta_diezyseis,
-        type: datatypes.SET_RESPUESTA_DIEZYSEIS
+        answer_16,
+        type: datatypes.SET_ANSWER_16
     }
 }
 
-export const set_respuesta_diezysiete = respuesta_diezysiete => {
+export const set_answer_17 = answer_17 => {
     return {
-        respuesta_diezysiete,
-        type: datatypes.SET_RESPUESTA_DIEZYSIETE
+        answer_17,
+        type: datatypes.SET_ANSWER_17
     }
 }
 
-export const set_respuesta_diezyocho = respuesta_diezyocho => {
+export const set_answer_18 = answer_18 => {
     return {
-        respuesta_diezyocho,
-        type: datatypes.SET_RESPUESTA_DIEZYOCHO
+        answer_18,
+        type: datatypes.SET_ANSWER_18
     }
 }
 
-export const set_respuesta_diezynueve = respuesta_diezynueve => {
+export const set_answer_19 = answer_19 => {
     return {
-        respuesta_diezynueve,
-        type: datatypes.SET_RESPUESTA_DIEZYNUEVE
+        answer_19,
+        type: datatypes.SET_ANSWER_19
     }
 }
 
-export const set_respuesta_veinte = respuesta_veinte => {
+export const set_answer_20 = answer_20 => {
     return {
-        respuesta_veinte,
-        type: datatypes.SET_RESPUESTA_VEINTE
+        answer_20,
+        type: datatypes.SET_ANSWER_20
     }
 }
 
-export const set_respuesta_veinteyuno = respuesta_veinteyuno => {
+export const set_answer_21 = answer_21 => {
     return {
-        respuesta_veinteyuno,
-        type: datatypes.SET_RESPUESTA_VEINTEYUNO
+        answer_21,
+        type: datatypes.SET_ANSWER_21
     }
 }
 
-export const set_respuesta_veinteydos = respuesta_veinteydos => {
+export const set_answer_22 = answer_22 => {
     return {
-        respuesta_veinteydos,
-        type: datatypes.SET_RESPUESTA_VEINTEYDOS
+        answer_22,
+        type: datatypes.SET_ANSWER_22
     }
 }
 
-export const set_respuesta_veinteytres = respuesta_veinteytres => {
+export const set_answer_23 = answer_23 => {
     return {
-        respuesta_veinteytres,
-        type: datatypes.SET_RESPUESTA_VEINTEYTRES
+        answer_23,
+        type: datatypes.SET_ANSWER_23
     }
 }
 
-export const set_respuesta_veinteycuatro = respuesta_veinteycuatro => {
+export const set_answer_24 = answer_24 => {
     return {
-        respuesta_veinteycuatro,
-        type: datatypes.SET_RESPUESTA_VEINTEYCUATRO
+        answer_24,
+        type: datatypes.SET_ANSWER_24
     }
 }
 
-export const set_respuesta_veinteycinco = respuesta_veinteycinco => {
+export const set_answer_25 = answer_25 => {
     return {
-        respuesta_veinteycinco,
-        type: datatypes.SET_RESPUESTA_VEINTEYCINCO
+        answer_25,
+        type: datatypes.SET_ANSWER_25
     }
 }
 
-export const set_respuesta_veinteyseis = respuesta_veinteyseis => {
+export const set_answer_26 = answer_26 => {
     return {
-        respuesta_veinteyseis,
-        type: datatypes.SET_RESPUESTA_VEINTEYSEIS
+        answer_26,
+        type: datatypes.SET_ANSWER_26
     }
 }
 
-export const set_respuesta_veinteysiete = respuesta_veinteysiete => {
+export const set_answer_27 = answer_27 => {
     return {
-        respuesta_veinteysiete,
-        type: datatypes.SET_RESPUESTA_VEINTEYSIETE
+        answer_27,
+        type: datatypes.SET_ANSWER_27
     }
 }
 
-export const set_respuesta_veinteyocho = respuesta_veinteyocho => {
+export const set_answer_28 = answer_28 => {
     return {
-        respuesta_veinteyocho,
-        type: datatypes.SET_RESPUESTA_VEINTEYOCHO
+        answer_28,
+        type: datatypes.SET_ANSWER_28
     }
 }
 
-export const set_respuesta_veinteynueve = respuesta_veinteynueve => {
+export const set_answer_29 = answer_29 => {
     return {
-        respuesta_veinteynueve,
-        type: datatypes.SET_RESPUESTA_VEINTEYNUEVE
+        answer_29,
+        type: datatypes.SET_ANSWER_29
     }
 }
 
-export const set_respuesta_treinta = respuesta_treinta => {
+export const set_answer_30 = answer_30 => {
     return {
-        respuesta_treinta,
-        type: datatypes.SET_RESPUESTA_TREINTA
+        answer_30,
+        type: datatypes.SET_ANSWER_30
     }
 }
 
-export const set_respuesta_treintayuno = respuesta_treintayuno => {
+export const set_answer_31 = answer_31 => {
     return {
-        respuesta_treintayuno,
-        type: datatypes.SET_RESPUESTA_TREINTAYUNO
+        answer_31,
+        type: datatypes.SET_ANSWER_31
     }
 }
 
-export const set_respuesta_treintaydos = respuesta_treintaydos => {
+export const set_answer_32 = answer_32 => {
     return {
-        respuesta_treintaydos,
-        type: datatypes.SET_RESPUESTA_TREINTAYDOS
+        answer_32,
+        type: datatypes.SET_ANSWER_32
     }
 }
 
-export const set_respuesta_treintaytres = respuesta_treintaytres => {
+export const set_answer_33 = answer_33 => {
     return {
-        respuesta_treintaytres,
-        type: datatypes.SET_RESPUESTA_TREINTAYTRES
+        answer_33,
+        type: datatypes.SET_ANSWER_33
     }
 }
 
-export const set_respuesta_treintaycuatro = respuesta_treintaycuatro => {
+export const set_answer_34 = answer_34 => {
     return {
-        respuesta_treintaycuatro,
-        type: datatypes.SET_RESPUESTA_TREINTAYCUATRO
+        answer_34,
+        type: datatypes.SET_ANSWER_34
     }
 }
 
-export const set_respuesta_treintaycinco = respuesta_treintaycinco => {
+export const set_answer_35 = answer_35 => {
     return {
-        respuesta_treintaycinco,
-        type: datatypes.SET_RESPUESTA_TREINTAYCINCO
+        answer_35,
+        type: datatypes.SET_ANSWER_35
     }
 }
 
-export const set_respuesta_treintayseis = respuesta_treintayseis => {
+export const set_answer_36 = answer_36 => {
     return {
-        respuesta_treintayseis,
-        type: datatypes.SET_RESPUESTA_TREINTAYSEIS
+        answer_36,
+        type: datatypes.SET_ANSWER_36
     }
 }
 
-export const set_respuesta_treintaysiete = respuesta_treintaysiete => {
+export const set_answer_37 = answer_37 => {
     return {
-        respuesta_treintaysiete,
-        type: datatypes.SET_RESPUESTA_TREINTAYSIETE
+        answer_37,
+        type: datatypes.SET_ANSWER_37
     }
 }
 
-export const set_respuesta_treintayocho = respuesta_treintayocho => {
+export const set_answer_38 = answer_38 => {
     return {
-        respuesta_treintayocho,
-        type: datatypes.SET_RESPUESTA_TREINTAYOCHO
+        answer_38,
+        type: datatypes.SET_ANSWER_38
     }
 }
 
-export const set_respuesta_treintaynueve = respuesta_treintaynueve => {
+export const set_answer_39 = answer_39 => {
     return {
-        respuesta_treintaynueve,
-        type: datatypes.SET_RESPUESTA_TREINTAYNUEVE
+        answer_39,
+        type: datatypes.SET_ANSWER_39
     }
 }
 
-export const set_respuesta_cuarenta = respuesta_cuarenta => {
+export const set_answer_40 = answer_40 => {
     return {
-        respuesta_cuarenta,
-        type: datatypes.SET_RESPUESTA_CUARENTA
+        answer_40,
+        type: datatypes.SET_ANSWER_40
     }
 }

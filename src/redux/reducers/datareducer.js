@@ -1,51 +1,51 @@
 import { datatypes } from "../actions/dataactions";
 
 const initialState = {
-    lista_respuestas: [],
+    answer_list: [],
     menu_open: false,
-    id_pregunta: 0,
-    nro_pregunta: 1,
-    nro_categoria: '',
-    respuesta_uno: {},
-    respuesta_dos: {},
-    respuesta_tres: {},
-    respuesta_cuatro: {},
-    respuesta_cinco: {},
-    respuesta_seis: {},
-    respuesta_siete: {},
-    respuesta_ocho: {},
-    respuesta_nueve: {},
-    respuesta_diez: {},
-    respuesta_once: {},
-    respuesta_doce: {},
-    respuesta_trece: {},
-    respuesta_catorce: {},
-    respuesta_quince: {},
-    respuesta_diezyseis: {},
-    respuesta_diezysiete: {},
-    respuesta_diezyocho: {},
-    respuesta_diezynueve: {},
-    respuesta_veinte: {},
-    respuesta_veinteyuno: {},
-    respuesta_veinteydos: {},
-    respuesta_veinteytres: {},
-    respuesta_veinteycuatro: {},
-    respuesta_veinteycinco: {},
-    respuesta_veinteyseis: {},
-    respuesta_veinteysiete: {},
-    respuesta_veinteyocho: {},
-    respuesta_veinteynueve: {},
-    respuesta_treinta: {},
-    respuesta_treintayuno: {},
-    respuesta_treintaydos: {},
-    respuesta_treintaytres: {},
-    respuesta_treintaycuatro: {},
-    respuesta_treintaycinco: {},
-    respuesta_treintayseis: {},
-    respuesta_treintaysiete: {},
-    respuesta_treintayocho: {},
-    respuesta_treintaynueve: {},
-    respuesta_cuarenta: {},
+    id_question: 0,
+    number_question: 1,
+    number_category: '',
+    answer_1: {},
+    answer_2: {},
+    answer_3: {},
+    answer_4: {},
+    answer_5: {},
+    answer_6: {},
+    answer_7: {},
+    answer_8: {},
+    answer_9: {},
+    answer_10: {},
+    answer_11: {},
+    answer_12: {},
+    answer_13: {},
+    answer_14: {},
+    answer_15: {},
+    answer_16: {},
+    answer_17: {},
+    answer_18: {},
+    answer_19: {},
+    answer_20: {},
+    answer_21: {},
+    answer_22: {},
+    answer_23: {},
+    answer_24: {},
+    answer_25: {},
+    answer_26: {},
+    answer_27: {},
+    answer_28: {},
+    answer_29: {},
+    answer_30: {},
+    answer_31: {},
+    answer_32: {},
+    answer_33: {},
+    answer_34: {},
+    answer_35: {},
+    answer_36: {},
+    answer_37: {},
+    answer_38: {},
+    answer_39: {},
+    answer_40: {}
 }
 
 const datareducer = (state = initialState, action) => {
@@ -55,269 +55,269 @@ const datareducer = (state = initialState, action) => {
             ... state,
             menu_open
         }
-    }else if (action.type === datatypes.SET_LISTA_RESPUESTAS){
-        const lista_respuestas = action.lista_respuestas
+    }else if (action.type === datatypes.SET_ANSWER_LIST){
+        const answer_list = action.answer_list
         return {
             ... state,
-            lista_respuestas
+            answer_list
         }
-    }else if (action.type === datatypes.SET_ID_PREGUNTA){
-        const id_pregunta = action.id_pregunta
+    }else if (action.type === datatypes.SET_ID_QUESTION){
+        const id_question = action.id_question
         return {
             ... state,
-            id_pregunta
+            id_question
         }
-    }else if (action.type === datatypes.SET_NRO_PREGUNTA){
-        const nro_pregunta = action.nro_pregunta
+    }else if (action.type === datatypes.SET_NUMBER_QUESTION){
+        const number_question = action.number_question
         return {
             ... state,
-            nro_pregunta
+            number_question
         }
-    }else if (action.type === datatypes.SET_NRO_CATEGORIA){
-        const nro_categoria = action.nro_categoria
+    }else if (action.type === datatypes.SET_NUMBER_CATEGORY){
+        const number_category = action.number_category
         return {
             ... state,
-            nro_categoria
+            number_category
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_UNO){
-        const respuesta_uno = action.respuesta_uno
+    }else if (action.type === datatypes.SET_ANSWER_1){
+        const answer_1 = action.answer_1
         return {
             ... state,
-            respuesta_uno
+            answer_1
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DOS){
-        const respuesta_dos = action.respuesta_dos
+    }else if (action.type === datatypes.SET_ANSWER_2){
+        const answer_2 = action.answer_2
         return {
             ... state,
-            respuesta_dos
+            answer_2
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TRES){
-        const respuesta_tres = action.respuesta_tres
+    }else if (action.type === datatypes.SET_ANSWER_3){
+        const answer_3 = action.answer_3
         return {
             ... state,
-            respuesta_tres
+            answer_3
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_CUATRO){
-        const respuesta_cuatro = action.respuesta_cuatro
+    }else if (action.type === datatypes.SET_ANSWER_4){
+        const answer_4 = action.answer_4
         return {
             ... state,
-            respuesta_cuatro
+            answer_4
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_CINCO){
-        const respuesta_cinco = action.respuesta_cinco
+    }else if (action.type === datatypes.SET_ANSWER_5){
+        const answer_5 = action.answer_5
         return {
             ... state,
-            respuesta_cinco
+            answer_5
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_SEIS){
-        const respuesta_seis = action.respuesta_seis
+    }else if (action.type === datatypes.SET_ANSWER_6){
+        const answer_6 = action.answer_6
         return {
             ... state,
-            respuesta_seis
+            answer_6
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_SIETE){
-        const respuesta_siete = action.respuesta_siete
+    }else if (action.type === datatypes.SET_ANSWER_7){
+        const answer_7 = action.answer_7
         return {
             ... state,
-            respuesta_siete
+            answer_7
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_OCHO){
-        const respuesta_ocho = action.respuesta_ocho
+    }else if (action.type === datatypes.SET_ANSWER_8){
+        const answer_8 = action.answer_8
         return {
             ... state,
-            respuesta_ocho
+            answer_8
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_NUEVE){
-        const respuesta_nueve = action.respuesta_nueve
+    }else if (action.type === datatypes.SET_ANSWER_9){
+        const answer_9 = action.answer_9
         return {
             ... state,
-            respuesta_nueve
+            answer_9
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DIEZ){
-        const respuesta_diez = action.respuesta_diez
+    }else if (action.type === datatypes.SET_ANSWER_10){
+        const answer_11 = action.answer_11
         return {
             ... state,
-            respuesta_diez
+            answer_11
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_ONCE){
-        const respuesta_once = action.respuesta_once
+    }else if (action.type === datatypes.SET_ANSWER_11){
+        const answer_11 = action.answer_11
         return {
             ... state,
-            respuesta_once
+            answer_11
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DOCE){
-        const respuesta_doce = action.respuesta_doce
+    }else if (action.type === datatypes.SET_ANSWER_12){
+        const answer_12 = action.answer_12
         return {
             ... state,
-            respuesta_doce
+            answer_12
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TRECE){
-        const respuesta_trece = action.respuesta_trece
+    }else if (action.type === datatypes.SET_ANSWER_13){
+        const answer_13 = action.answer_13
         return {
             ... state,
-            respuesta_trece
+            answer_13
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_CATORCE){
-        const respuesta_catorce = action.respuesta_catorce
+    }else if (action.type === datatypes.SET_ANSWER_14){
+        const answer_14 = action.answer_14
         return {
             ... state,
-            respuesta_catorce
+            answer_14
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_QUINCE){
-        const respuesta_quince = action.respuesta_quince
+    }else if (action.type === datatypes.SET_ANSWER_15){
+        const answer_15 = action.answer_15
         return {
             ... state,
-            respuesta_quince
+            answer_15
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DIEZYSEIS){
-        const respuesta_diezyseis = action.respuesta_diezyseis
+    }else if (action.type === datatypes.SET_ANSWER_16){
+        const answer_16 = action.answer_16
         return {
             ... state,
-            respuesta_diezyseis
+            answer_16
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DIEZYSIETE){
-        const respuesta_diezysiete = action.respuesta_diezysiete
+    }else if (action.type === datatypes.SET_ANSWER_17){
+        const answer_17 = action.answer_17
         return {
             ... state,
-            respuesta_diezysiete
+            answer_17
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DIEZYOCHO){
-        const respuesta_diezyocho = action.respuesta_diezyocho
+    }else if (action.type === datatypes.SET_ANSWER_18){
+        const answer_18 = action.answer_18
         return {
             ... state,
-            respuesta_diezyocho
+            answer_18
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_DIEZYNUEVE){
-        const respuesta_diezynueve = action.respuesta_diezynueve
+    }else if (action.type === datatypes.SET_ANSWER_19){
+        const answer_19 = action.answer_19
         return {
             ... state,
-            respuesta_diezynueve
+            answer_19
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTE){
-        const respuesta_veinte = action.respuesta_veinte
+    }else if (action.type === datatypes.SET_ANSWER_20){
+        const answer_20 = action.answer_20
         return {
             ... state,
-            respuesta_veinte
+            answer_20
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYUNO){
-        const respuesta_veinteyuno = action.respuesta_veinteyuno
+    }else if (action.type === datatypes.SET_ANSWER_21){
+        const answer_21 = action.answer_21
         return {
             ... state,
-            respuesta_veinteyuno
+            answer_21
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYDOS){
-        const respuesta_veinteydos = action.respuesta_veinteydos
+    }else if (action.type === datatypes.SET_ANSWER_22){
+        const answer_22 = action.answer_22
         return {
             ... state,
-            respuesta_veinteydos
+            answer_22
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYTRES){
-        const respuesta_veinteytres = action.respuesta_veinteytres
+    }else if (action.type === datatypes.SET_ANSWER_23){
+        const answer_23 = action.answer_23
         return {
             ... state,
-            respuesta_veinteytres
+            answer_23
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYCUATRO){
-        const respuesta_veinteycuatro = action.respuesta_veinteycuatro
+    }else if (action.type === datatypes.SET_ANSWER_24){
+        const answer_24 = action.answer_24
         return {
             ... state,
-            respuesta_veinteycuatro
+            answer_24
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYCINCO){
-        const respuesta_veinteycinco = action.respuesta_veinteycinco
+    }else if (action.type === datatypes.SET_ANSWER_25){
+        const answer_25 = action.answer_25
         return {
             ... state,
-            respuesta_veinteycinco
+            answer_25
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYSEIS){
-        const respuesta_veinteyseis = action.respuesta_veinteyseis
+    }else if (action.type === datatypes.SET_ANSWER_26){
+        const answer_26 = action.answer_26
         return {
             ... state,
-            respuesta_veinteyseis
+            answer_26
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYSIETE){
-        const respuesta_veinteysiete = action.respuesta_veinteysiete
+    }else if (action.type === datatypes.SET_ANSWER_27){
+        const answer_27 = action.answer_27
         return {
             ... state,
-            respuesta_veinteysiete
+            answer_27
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYOCHO){
-        const respuesta_veinteyocho = action.respuesta_veinteyocho
+    }else if (action.type === datatypes.SET_ANSWER_28){
+        const answer_28 = action.answer_28
         return {
             ... state,
-            respuesta_veinteyocho
+            answer_28
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_VEINTEYNUEVE){
-        const respuesta_veinteynueve = action.respuesta_veinteynueve
+    }else if (action.type === datatypes.SET_ANSWER_29){
+        const answer_29 = action.answer_29
         return {
             ... state,
-            respuesta_veinteynueve
+            answer_29
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTA){
-        const respuesta_treinta = action.respuesta_treinta
+    }else if (action.type === datatypes.SET_ANSWER_30){
+        const answer_30 = action.answer_30
         return {
             ... state,
-            respuesta_treinta
+            answer_30
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYUNO){
-        const respuesta_treintayuno = action.respuesta_treintayuno
+    }else if (action.type === datatypes.SET_ANSWER_31){
+        const answer_31 = action.answer_31
         return {
             ... state,
-            respuesta_treintayuno
+            answer_31
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYDOS){
-        const respuesta_treintaydos = action.respuesta_treintaydos
+    }else if (action.type === datatypes.SET_ANSWER_32){
+        const answer_32 = action.answer_32
         return {
             ... state,
-            respuesta_treintaydos
+            answer_32
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYTRES){
-        const respuesta_treintaytres = action.respuesta_treintaytres
+    }else if (action.type === datatypes.SET_ANSWER_33){
+        const answer_33 = action.answer_33
         return {
             ... state,
-            respuesta_treintaytres
+            answer_33
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYCUATRO){
-        const respuesta_treintaycuatro = action.respuesta_treintaycuatro
+    }else if (action.type === datatypes.SET_ANSWER_34){
+        const answer_34 = action.answer_34
         return {
             ... state,
-            respuesta_treintaycuatro
+            answer_34
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYCINCO){
-        const respuesta_treintaycinco = action.respuesta_treintaycinco
+    }else if (action.type === datatypes.SET_ANSWER_35){
+        const answer_35 = action.answer_35
         return {
             ... state,
-            respuesta_treintaycinco
+            answer_35
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYSEIS){
-        const respuesta_treintayseis = action.respuesta_treintayseis
+    }else if (action.type === datatypes.SET_ANSWER_36){
+        const answer_36 = action.answer_36
         return {
             ... state,
-            respuesta_treintayseis
+            answer_36
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYSIETE){
-        const respuesta_treintaysiete = action.respuesta_treintaysiete
+    }else if (action.type === datatypes.SET_ANSWER_37){
+        const answer_37 = action.answer_37
         return {
             ... state,
-            respuesta_treintaysiete
+            answer_37
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYOCHO){
-        const respuesta_treintayocho = action.respuesta_treintayocho
+    }else if (action.type === datatypes.SET_ANSWER_38){
+        const answer_38 = action.answer_38
         return {
             ... state,
-            respuesta_treintayocho
+            answer_38
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_TREINTAYNUEVE){
-        const respuesta_treintaynueve = action.respuesta_treintaynueve
+    }else if (action.type === datatypes.SET_ANSWER_39){
+        const answer_39 = action.answer_39
         return {
             ... state,
-            respuesta_treintaynueve
+            answer_39
         }
-    }else if (action.type === datatypes.SET_RESPUESTA_CUARENTA){
-        const respuesta_cuarenta = action.respuesta_cuarenta
+    }else if (action.type === datatypes.SET_ANSWER_40){
+        const answer_40 = action.answer_40
         return {
             ... state,
-            respuesta_cuarenta
+            answer_40
         }
     }
     return state

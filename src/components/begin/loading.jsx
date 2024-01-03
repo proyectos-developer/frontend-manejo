@@ -20,19 +20,23 @@ export default function LoadingScreen ({navigation}) {
         'Nunito-SemiBold':  require('../../assets/fonts/Nunito-SemiBold.ttf'),
     }
 
-
     useEffect(() => {
         if (isFocused){
             load_font_async ()
         }
     }, [isFocused])
 
+    /**We load the fonts for the texts in the app*/
     const load_font_async = async() => {
         await Font.loadAsync(fontsLoaded)
-        obtener_token ()
+        get_token ()
     }
 
-    const obtener_token = async () => {
+    /**We check if the user have their session open
+     * Redirects to the Login Screen
+     * or the Catetory selection Screen
+    */
+    const get_token = async () => {
         try {
             const token = await AsyncStorage.getItem ('token')
             if (token){
