@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: drivingschool.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: drivingschool.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useEffect, useState} from 'react'
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, Touchable, FlatList } from 'react-native'
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
+
+import { useDispatch, useSelector } from 'react-redux'
+import Menu from '../home/menu/menu'
+import { ICON } from '../../assets/constants/images'
+import { set_menu_open } from '../../redux/actions/dataactions';
+import { useIsFocused } from '@react-navigation/native';
+import {drivingschooldata} from '../../redux/slice/drivingschooldata';
+import {drivingschoolsConstants} from '../../redux/uri/drivingschools-constants'
+
+export default function EscuelasManejoScreen ({navigation}) {
+
+    const dispatch = useDispatch()
+    const isFocused = useIsFocused()
+
+    const [lista_escuelas, setListaEscuelas] = useState([])
+
+    const [distrito, setDistrito] = useState ('')
+    const {menu_open} = useSelector(({datareducer}) => datareducer)
+    const {get_driving_schools, get_driving_schools_search} = useSelector (({drivingschools}) => drivingschools)
+    const begin = useSelector (({begin}) => begin)
+
+    /**Function that searches for available driving schools */
+    useEffect(() => {
+      if (isFocused){
+        dispatch (drivingschooldata(drivingschoolsConstants(false, 0).get_driving_schools))
+      }
+    }, [isFocused])
+
+    useEffect (() => {
+      if (get_driving_schools &amp;&amp; get_driving_schools.driving_schools){
+        setListaEscuelas(get_driving_schools.driving_schools)
+      }
+    }, [get_driving_schools])
+
+    useEffect (() => {
+      if (get_driving_schools_search &amp;&amp; get_driving_schools_search.driving_schools){
+        setListaEscuelas(get_driving_schools_search.driving_schools)
+      }
+    }, [get_driving_schools_search])
+
+    const drivingSchoolItem = ({item}) => (
+      &lt;View style={[styles.container_clinica, {marginRight: 5.5, marginLeft: 5.5, marginBottom: 18}]}>
+          &lt;View style={styles.container_superior}>
+              &lt;Text style={styles.texto_clinica}>{item.name}&lt;/Text>
+              
+          &lt;/View>
+          &lt;View style={styles.container_inferior}>
+              &lt;View style={styles.container_ubicacion}>
+                  &lt;Image source={ICON.MEDICO_ICONO_UBICACION} style={styles.icono_ubicacion}/>
+                  &lt;Text style={styles.texto_ubicacion}>{item.location}&lt;/Text>
+              &lt;/View>
+              &lt;Text style={styles.texto_precio}>Examenes desde S/.{item.cost}&lt;/Text>
+              &lt;TouchableOpacity style={styles.boton_telefono}>
+                  &lt;Image source={ICON.MEDICO_ICONO_TELEFONO} style={styles.icono_boton}/>
+                  &lt;Text style={styles.texto_boton}>{item.phone_number}&lt;/Text>
+              &lt;/TouchableOpacity>
+          &lt;/View>
+      &lt;/View>
+    )
+
+    /**Feature that searches for available driving schools 
+     * by location filter */
+    const search_driving_schools = () => {
+      if (distrito === ''){
+        dispatch (drivingschooldata(drivingschoolsConstants(false, 0).get_driving_schools))
+      }else{
+        dispatch(drivingschooldata(drivingschoolsConstants(false, distrito).get_driving_schools_search))
+      }
+    }
+
+    return (
+        &lt;GestureHandlerRootView style={styles.container}>
+            &lt;ImageBackground style={styles.fondo} source={ICON.PANTALLA_SELECCION_FONDO}>
+            
+                &lt;TouchableOpacity style={[styles.menu]} onPress={() => dispatch(set_menu_open(true))}>
+                    &lt;Image source={ICON.PANTALLA_SELECCION_MENU}/>
+                &lt;/TouchableOpacity>
+                
+                &lt;TouchableOpacity style={[styles.avatar]} onPress={() => navigation.navigate ('UpdateDataScreen')}>
+                    &lt;Image source={ICON.PANTALLA_SELECCION_AVATAR}/>
+                &lt;/TouchableOpacity>
+                
+                &lt;Text style={styles.texto_selecciona}>REVISA DÓNDE TOMAR&lt;/Text>
+                &lt;Text style={styles.texto_categoria}>CLASES DE MANEJO&lt;/Text>
+
+                {
+                    menu_open ? (
+                        &lt;Menu navigation={navigation}/>
+                    ) : null
+                }
+            &lt;/ImageBackground>
+              
+            &lt;View style={styles.container_input}>
+                &lt;TextInput
+                    keyboardType='default'
+                    style={[styles.input]}
+                    value={distrito}
+                    onChangeText={(distrito) => setDistrito(distrito)}
+                    placeholder='Ingresa tu distrito'
+                    placeholderTextColor='#252525'
+                    returnKeyType='done'/>
+
+                &lt;TouchableOpacity style={styles.view_search} onPress={() => search_driving_schools()}>
+                    &lt;Image source={ICON.MEDICO_ICONO_LUPA} style={styles.icono_search}/>
+                &lt;/TouchableOpacity>
+            &lt;/View>
+
+            &lt;Text style={styles.texto_proceso}>Conoce todo sobre el proceso para obtener tu licencia de conducir&lt;/Text>
+
+            &lt;View style={[styles.container_filas, {marginBottom: 30}]}>
+                &lt;FlatList
+                  data={lista_escuelas}
+                  renderItem={drivingSchoolItem}
+                  numColumns={2}
+                  keyExtractor={(item) => item.id}/>
+            &lt;/View>
+            {
+              begin.loading ? ( 
+                &lt;View style={styles.view_loading}>
+                  &lt;Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                &lt;/View>
+              ) : null
+            }
+        &lt;/GestureHandlerRootView>
+    )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    width: '100%',
+    alignItems: 'center', 
+  },
+  fondo: {
+    height: 201,
+    width: '100%',
+    marginBottom: 30
+  },
+  menu: {
+    width: 80,
+    height: 80,
+    position: 'absolute',
+    top: 25,
+    left: 15
+  },
+  avatar: {
+      width: 80,
+      height: 80,
+      position: 'absolute',
+      top: 25,
+      right: 15
+  },
+  texto_categoria: {
+    position: 'absolute',
+    left: 31,
+    top: 116,
+    fontFamily: 'Nunito-Black', fontSize: 30, color: 'white', lineHeight: 55
+  },
+  texto_selecciona: {
+    position: 'absolute',
+    left: 31,
+    top: 92,
+    fontFamily: 'Nunito-Medium', fontSize: 18, color: 'white', lineHeight: 34
+  },
+  container_input : {
+    borderColor: '#252525',
+    borderWidth: 2,
+    width: 330,
+    height: 40,
+    borderRadius: 35,
+    backgroundColor: '#ededed',
+    flexDirection: 'row',
+    marginBottom: 34
+  },
+  input :{
+    width: 261,
+    height: 36,
+    paddingLeft: 21,
+    borderBottomLeftRadius: 35,
+    borderBottomRightRadius: 35,
+    fontFamily: 'Nunito-Regular'
+  },
+  view_search:{
+    backgroundColor: '#252525',
+    width: 65,
+    height: 36,
+    borderRadius: 35,
+    alignSelf: 'center',
+    justifyContent: 'center'
+  },
+  icono_search: {
+    width: 35,
+    height: 35,
+    marginLeft: 15,
+    marginRight: 15
+  },
+  container_filas: {
+    width: 308,
+    height: 374,
+    flexDirection: 'row'
+  },
+  container_clinica: {
+    width: 143,
+    height: 178,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#ededed'
+  },
+  container_superior: {
+    width: 139,
+    height: 112,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    backgroundColor: 'white'
+  },
+  container_inferior: {
+    width: 139,
+    height: 62,
+    borderBottomLeftRadius: 16,
+    borderBottomRightRadius: 16,
+    backgroundColor: '#ededed'
+  },
+  texto_clinica: {
+    fontSize: 14,
+    lineHeight: 19,
+    fontFamily: 'Nunito-Black',
+    textAlign: 'center',
+    marginTop: 19
+  },
+  container_ubicacion:{
+    flexDirection: 'row',
+    alignSelf: 'center',
+    height: 14,
+    width: 48,
+    marginTop: 5
+  },
+  icono_ubicacion: {
+    width: 14,
+    height: 14,
+    marginRight: 3
+  },
+  texto_ubicacion: {
+    fontSize: 8,
+    lineHeight: 14,
+    fontFamily: 'Nunito-Regular',
+    color: '#252525'
+  },
+  texto_precio: {
+    fontSize: 10,
+    lineHeight: 12,
+    marginBottom: 4,
+    fontFamily: 'Nunito-ExtraBold',
+    textAlign: 'center',
+    color: '#252525'
+  },
+  boton_telefono :{
+    backgroundColor: '#ff0000',
+    width: 99,
+    height: 19,
+    flexDirection: 'row',
+    borderRadius: 25,
+    alignSelf: 'center',
+    paddingTop: 2.5,
+    paddingBottom: 2.5,
+    justifyContent: 'center'
+  },
+  icono_boton: {
+    width: 14,
+    height: 14,
+    marginRight: 6
+  },
+  texto_boton:{
+    fontSize: 12,
+    lineHeight: 14,
+    color: 'white',
+    fontFamily: 'Nunito-Black'
+  },
+  texto_proceso: {
+    color: '#ff0000',
+    fontSize: 11,
+    lineHeight: 15,
+    fontFamily: 'Nunito-Bold',
+    marginBottom: 39
+  },
+  view_loading: {
+    position: 'absolute',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignSelf: 'center'
+  },
+  icono_loading: {
+    width: '100%'
+  }
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jan 03 2024 18:33:05 GMT-0500 (hora estándar de Perú)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

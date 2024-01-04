@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: register.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: register.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import {useEffect, useState} from 'react'
+import { StyleSheet, Text, View, ImageBackground, Image, TouchableOpacity, KeyboardAvoidingView } from 'react-native'
+import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
+
+import {ICON} from '../../assets/constants/images'
+import { useDispatch, useSelector } from 'react-redux';
+import {begindata} from '../../redux/slice/begindata';
+import {beginConstants} from '../../redux/uri/begin-constants'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+export default function RegisterScreen ({navigation}) {
+
+    const dispatch = useDispatch()
+
+    const [names_surnames, setNamesSurnames] = useState ('')
+    const [email, setEmail] = useState ('')
+    const [password, setPassword] = useState ('')
+    const [validate_password, setValidatePassword] = useState ('')
+
+    const [enames_surnames, setENamesSurnames] = useState (false)
+    const [eemail, setEEmail] = useState (false)
+    const [epassword, setEPassword] = useState (false)
+    const [evalidate_password, setEValidatePassword] = useState (false)
+
+    const {register_user} = useSelector(({begin}) => begin)
+    const begin = useSelector(({begin}) => begin)
+
+    /**The user has successfully registered 
+     * (1) saved their token (save_token () function)
+     * (2) and then go to the category selection screen 
+    */
+    useEffect (() => {
+      if (register_user &amp;&amp; register_user.access_token){
+        save_token (register_user.access_token)
+      }
+    }, [register_user])
+
+    const save_token = async (token) => {
+      try {
+        await AsyncStorage.setItem ('token', token)
+        navigation.navigate ('HomeStack')
+      } catch (error) {
+        
+      }
+    }
+
+    /**Function to validate mandatory data 
+     * and register the user in the database 
+    */    
+    const register_user_data = () => {
+      if (names_surnames === '' || email === '' || password === '' || validate_password === '' || (password !== validate_password)){
+        setENamesSurnames(names_surnames === '' ? true : false)
+        setEEmail (email === '' ? true : false)
+        setEPassword (password === '' || validate_password === '' || (validate_password !== password ? true : false))
+      } else{
+        const data_user = {
+          name: names_surnames,
+          email: email,
+          password: password
+        }
+        dispatch (begindata(beginConstants(data_user, false, 0, 0).register_user))
+      }
+    }
+
+    return (
+          &lt;GestureHandlerRootView style={styles.container}>
+              &lt;ImageBackground style={styles.fondo} source={ICON.FONDO_TOP}>
+                &lt;Image source={ICON.LOGO_WHITE_191} style={styles.logo}/>
+              &lt;/ImageBackground>
+
+              &lt;View style={[styles.container_datos]}>
+                &lt;Image source={ICON.AVATAR_GREY_199} style={[styles.avatar]}/>
+
+                    &lt;TextInput
+                      keyboardType='default'
+                      style={[styles.input]}
+                      value={names_surnames}
+                      onChangeText={(names_surnames) => setNamesSurnames(names_surnames)}
+                      placeholder='Nombres y Apellidos'
+                      placeholderTextColor='#252525'
+                      onSubmitEditing={() => text_email.focus()}
+                      returnKeyType='next'/>
+
+                    &lt;TextInput
+                      keyboardType='email-address'
+                      style={[styles.input]}
+                      value={email}
+                      onChangeText={(email) => setEmail(email)}
+                      placeholder='email electrónico'
+                      placeholderTextColor='#252525'
+                      ref={(input) => { text_email = input }}
+                      onSubmitEditing={() => text_password.focus()}
+                      returnKeyType='next'
+                      autoCapitalize='none'/>
+
+                    &lt;TextInput
+                      keyboardType='default'
+                      style={[styles.input]}
+                      value={password}
+                      onChangeText={(password) => setPassword(password)}
+                      placeholder='Contraseña '
+                      placeholderTextColor='#252525'
+                      ref={(input) => { text_password = input }}
+                      onSubmitEditing={() => text_validate.focus()}
+                      returnKeyType='next'
+                      secureTextEntry={true}
+                      autoCapitalize='none'/>
+
+                    &lt;TextInput
+                      keyboardType='default'
+                      style={[styles.input]}
+                      value={validate_password}
+                      onChangeText={(validate_password) => setValidatePassword(validate_password)}
+                      placeholder='Confirmar contraseña '
+                      placeholderTextColor='#252525'
+                      ref={(input) => { text_validate = input }}
+                      onSubmitEditing={() => register_user_data()}
+                      returnKeyType='done'
+                      secureTextEntry={true}
+                      autoCapitalize='none'/>
+
+                    &lt;TouchableOpacity style={[styles.boton]} onPress={() => register_user_data()}>
+                      &lt;Text style={styles.texto_registro}>Registrame&lt;/Text>
+                    &lt;/TouchableOpacity>
+                    
+              &lt;/View>
+                  
+            {
+              begin.loading ? ( 
+                &lt;View style={styles.view_loading}>
+                  &lt;Image source={ICON.LOADING_SCREEN} style={styles.icono_loading}/>
+                &lt;/View>
+              ) : null
+            }
+
+          &lt;/GestureHandlerRootView>
+    )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+  },
+  fondo: {
+    height: 371,
+    width: '100%',
+    left: 0, 
+    top: 0
+  },
+  logo: {
+    width: 191,
+    height: 191,
+    alignSelf: 'center'
+  },
+  container_datos: {
+    position: 'absolute',
+    top: 211,
+    backgroundColor: '#f1f1f1',
+    width: 314,
+    height: 554,
+    borderRadius: 40,
+    left: 23
+  },
+  avatar: {
+    width: 191,
+    height: 191,
+    alignSelf: 'center'
+  },
+  input: {
+    width: 284,
+    height: 43, 
+    alignSelf: 'center',
+    borderColor: '#252525',
+    borderWidth: 1,
+    borderRadius: 40,
+    paddingLeft: 26,
+    color: '#252525',
+    marginBottom: 21.5,
+    fontFamily: 'Nunito-Regular'
+  },
+  boton: {
+    width: 270,
+    height: 58,
+    alignSelf: 'center',
+    backgroundColor: '#ff0000',
+    borderRadius: 40
+  },
+  texto_registro: {
+    textAlign: 'center',
+    fontSize: 25,
+    lineHeight: 58,
+    fontFamily: 'Nunito-Bold',
+    color: 'white'
+  },
+  view_loading: {
+    position: 'absolute',
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    flex: 1
+  },
+  icono_loading: {
+    width: '100%'
+  }
+})</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Jan 03 2024 18:31:25 GMT-0500 (hora estándar de Perú)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

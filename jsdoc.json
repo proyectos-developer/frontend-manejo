@@ -4,8 +4,8 @@
         "dictionaries": ["jsdoc", "closure"]
     },
     "source": {
-        "include": ["src/components/"],
-        "includePattern": ".+\\.tsx$",
+        "include": ["src/components/menu"],
+        "includePattern": ".jsx",
         "excludePattern": "(node_modules/|docs)"
     },
     "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
@@ -22,7 +22,7 @@
     },
     "opts": {
         "encoding": "utf8",
-        "destination": "./public/docs/",
+        "destination": "./public/docs/menu",
         "recurse": true,
         "verbose": true
     }
